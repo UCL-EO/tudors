@@ -47,9 +47,11 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
-        nCastles = Math.floor(Math.random()*6)+1
+        nCastles = Math.floor(Math.random()*6)+2
         addLineOfCastles(nCastles,Math.floor(canvasx*0.2))
+        nCastles = Math.floor(Math.random()*6)+2
         addLineOfCastles(nCastles,Math.floor(canvasx*0.5))
+        nCastles = Math.floor(Math.random()*6)+2
         addLineOfCastles(nCastles,Math.floor(canvasx*0.7))
 
         },
