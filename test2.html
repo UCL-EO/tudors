@@ -57,10 +57,11 @@ var myGameArea = {
         },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.context.drawImage(myField.image,
-                  this.x,
-                  this.y,
-                  this.width, this.height);
+        ctx = myGameArea.context;
+        ctx.drawImage(myField.image,
+                  myField.x,
+                  myField.y,
+                  myField.width, myField.height);
     }
 }
 
