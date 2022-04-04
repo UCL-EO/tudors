@@ -137,13 +137,15 @@ function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myArrows.length; i += 1) {
         if (myGamePiece.crashWith(myArrows[i])) {
-            return;
+            if (myArrows[i].active == 1) {
+              return;
+            }
         } 
     }
     for (j = 0; j < myCastles.length; j += 1) {
       for (i = 0; i < myArrows.length; i += 1) {
         if (myCastles[j].crashWith(myArrows[i])) {
-           myArrows[i].pop()
+           myArrows[i].active=0;
         }
       }
     }
@@ -153,6 +155,7 @@ function updateGameArea() {
     if (myGameArea.frameNo == 1 || everyinterval(Math.floor(Math.random()*200))) {
         height = Math.floor(Math.random()*myGameArea.canvas.height);
         myArrows.push(new component(arrowsizex, arrowsizey, "green", myGameArea.canvas.width-1, height));
+        myArrows[myArrows.length-1].active=1;
     }
     for (i = 0; i < myCastles.length; i += 1) {
         myCastles[i].update();
