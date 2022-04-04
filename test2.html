@@ -154,6 +154,9 @@ function updateGameArea() {
         height = Math.floor(Math.random()*myGameArea.canvas.height);
         myArrows.push(new component(arrowsizex, arrowsizey, "green", myGameArea.canvas.width-1, height));
     }
+    for (i = 0; i < myCastles.length; i += 1) {
+        myCastles[i].update();
+    }
     for (i = 0; i < myArrows.length; i += 1) {
         myArrows[i].x += -1;
         myArrows[i].update();
