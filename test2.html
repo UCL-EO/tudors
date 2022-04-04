@@ -176,7 +176,7 @@ function updateGameArea() {
 
 function addLineOfCastles(n,x) {
     for  (i = 0; i < n; i += 1) {
-        y = Math.floor(myGameArea.canvas.height/n)
+        y = Math.floor(i*myGameArea.canvas.height/n)
         myCastles.push(new component(castlesizex, castlesizey, "red", y, x));
     }
 }
