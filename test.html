@@ -136,7 +136,7 @@ function updateGameArea() {
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 1 || everyinterval(Math.floor(Math.random()*100))) {
+    if (myGameArea.frameNo == 1 || everyinterval(Math.floor(Math.random()*200))) {
         height = Math.floor(Math.random()*myGameArea.canvas.height);
         myArrows.push(new component(10, 10, "green", myGameArea.canvas.width-1, height));
     }
