@@ -47,7 +47,10 @@ var myGameArea = {
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
         nCastles = Math.floor(Math.random()*6)+1
-        addLineOfCastles(nCastles,100)
+        addLineOfCastles(nCastles,Math.floor(canvasx*0.2))
+        addLineOfCastles(nCastles,Math.floor(canvasx*0.5))
+        addLineOfCastles(nCastles,Math.floor(canvasx*0.7))
+
         },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
