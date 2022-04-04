@@ -1,2 +1,2 @@
 # tudors
-[tudors game](https://raw.githubusercontent.com/UCL-EO/tudors/main/test2.html)
+[tudors game](http:www2.geog.ucl.ac.uk/~plewis/tudors/test2.html)
