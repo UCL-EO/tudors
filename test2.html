@@ -65,11 +65,12 @@ function component(width, height, color, x, y, type) {
     this.y = y;
     this.gravity = 0;
     this.gravitySpeed = 0;
+    this.color=color;
     this.update = function() {
         ctx = myGameArea.context;
         if (this.type == "text") {
             ctx.font = this.width + " " + this.height;
-            ctx.fillStyle = color;
+            ctx.fillStyle = this.color;
             ctx.fillText(this.text, this.x, this.y);
         } else if (this.type == "image") {
       		ctx.drawImage(this.image, 
@@ -146,7 +147,6 @@ function updateGameArea() {
       for (i = 0; i < myArrows.length; i += 1) {
         if (myCastles[j].crashWith(myArrows[i])) {
            myArrows[i].active=0;
-           myArrows[i].color='blue';
         }
       }
     }
