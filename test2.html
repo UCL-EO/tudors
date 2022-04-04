@@ -16,10 +16,16 @@ var myGamePiece;
 var myArrows = [];
 var myCastles = [];
 var myScore;
+# my location
 var startx=10;
 var starty = 120;
+# size of me
 var sizex = 268/4;
 var sizey = 170/4;
+# size of arrow
+var arrowsizex = 20;
+var arrowsizey = 4;
+# canvas size
 var canvasx = 480*2;
 var canvasy = 270*2;
 
@@ -147,7 +153,7 @@ function updateGameArea() {
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(Math.floor(Math.random()*200))) {
         height = Math.floor(Math.random()*myGameArea.canvas.height);
-        myArrows.push(new component(10, 10, "green", myGameArea.canvas.width-1, height));
+        myArrows.push(new component(arrowsizex, arrowsizey, "green", myGameArea.canvas.width-1, height));
     }
     for (i = 0; i < myArrows.length; i += 1) {
         myArrows[i].x += -1;
