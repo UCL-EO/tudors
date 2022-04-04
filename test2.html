@@ -41,6 +41,11 @@ function startGame() {
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
+    keyboard : document.addEventListener("keydown", function(event) {
+        if (event.ctrlKey && event.key === "z") {
+          // Do Something, may be an 'Undo' operation
+        }
+    }),
     start : function() {
         this.canvas.width = canvasx;
         this.canvas.height = canvasy;
