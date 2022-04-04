@@ -66,6 +66,7 @@ function component(width, height, color, x, y, type) {
     this.gravity = 0;
     this.gravitySpeed = 0;
     this.color=color;
+    this.active=1;
     this.update = function() {
         ctx = myGameArea.context;
         if (this.type == "text") {
