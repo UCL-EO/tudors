@@ -173,7 +173,7 @@ function updateGameArea() {
     for (j = 0; j < myCastles.length; j += 1) {
       if ( 1) {
         for (i = 0; i < myArrows.length; i += 1) {
-          if (myCastles[j].crashWith(myArrows[i])) {
+          if (myArrows[i].active and myCastles[j].crashWith(myArrows[i])) {
              myArrows[i].active=0;
              myCastles[j].active = myCastles[j].active - 1;
              myCastles[j].image.src = "castle_" + myCastles[j].active.toString() + ".gif"
