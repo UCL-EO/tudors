@@ -27,6 +27,7 @@ var castlesizex = 100;
 var castlesizey = 100;
 var canvasx = 480*2;
 var canvasy = 270*2;
+var buffer = 20;
 
 function startGame() {
     myGamePiece = new component(sizex, sizey, "soldier.gif", startx, starty, "image");
@@ -110,10 +111,13 @@ function component(width, height, color, x, y, type) {
         }
     }
     this.hitLeft = function() {
-        var rockbottom = myGameArea.canvas.width - this.width;
+        var rockbottom = myGameArea.canvas.width - this.width - buffer;
         if (this.x > rockbottom) {
             this.x = rockbottom;
             this.gravitySpeed = 0;
+            myScore.text="YOU WON -- SCORE: " + myGameArea.frameNo;
+            myScore.update();
+ 
         }
     }
     this.hitRight = function() {
