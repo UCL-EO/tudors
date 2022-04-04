@@ -73,10 +73,12 @@ function component(width, height, color, x, y, type) {
             ctx.fillStyle = this.color;
             ctx.fillText(this.text, this.x, this.y);
         } else if (this.type == "image") {
-      		ctx.drawImage(this.image, 
-              this.x, 
-              this.y,
-              this.width, this.height);
+              if ( this.active ) {
+                ctx.drawImage(this.image, 
+                  this.x, 
+                  this.y,
+                  this.width, this.height);
+              }
         } else {
             ctx.fillStyle = this.color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -147,7 +149,6 @@ function updateGameArea() {
       for (i = 0; i < myArrows.length; i += 1) {
         if (myCastles[j].crashWith(myArrows[i])) {
            myArrows[i].active=0;
-           myArrows[i].image='pokemon.gif';
         }
       }
     }
