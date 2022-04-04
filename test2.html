@@ -26,11 +26,12 @@ var arrowsizex = 25*2;
 var arrowsizey = 5*2;
 var castlesizex = 100;
 var castlesizey = 100;
-var canvasx = 480*2;
-var canvasy = 270*2;
+var canvasx = Math.floor(6144/2);
+var canvasy = Math.floor(3072/2);
 var buffer = 20;
 
 function startGame() {
+    myField = new component(canvasx,canvasy,"background.gif",0,0,"image");
     myGamePiece = new component(sizex, sizey, "soldier.gif", startx, starty, "image");
     myGamePiece.gravity = 0.00;
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
