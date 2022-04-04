@@ -176,7 +176,7 @@ function updateGameArea() {
           if (myCastles[j].crashWith(myArrows[i])) {
              myArrows[i].active=0;
              var active = myCastles[j].active;
-             myCastles[j] = new component(myCastles[j].width, myCastles[j].height, "castle_"+active+".gif",myCastles[j].x, myCastles[j].y,"image")
+             myCastles[j] = new component(myCastles[j].width, myCastles[j].height, "castle_1.gif",myCastles[j].x, myCastles[j].y,"image")
              myCastles[j].active = active - 1;
           }
         }
