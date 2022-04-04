@@ -14,7 +14,7 @@ canvas {
 
 var iwon = 0;
 var gameover = 0;
-var maxhits = 5;
+var maxhits = 6;
 var myGamePiece;
 var myArrows = [];
 var myCastles = [];
@@ -176,7 +176,7 @@ function updateGameArea() {
           if (myArrows[i].active && myCastles[j].crashWith(myArrows[i])) {
              myArrows[i].active=0;
              myCastles[j].active = myCastles[j].active - 1;
-             myCastles[j].image.src = "castle_" + myCastles[j].active.toString() + ".gif"
+             myCastles[j].image.src = "castle_" + (maxhits - myCastles[j].active + 1).toString() + ".gif"
           }
         }
       }
