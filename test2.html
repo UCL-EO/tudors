@@ -82,7 +82,7 @@ function component(width, height, color, x, y, type) {
     this.gravity = 0;
     this.gravitySpeed = 0;
     this.color=color;
-    this.active=maxhits;
+    this.active=maxhits*width;
     this.update = function() {
         ctx = myGameArea.context;
         if (this.type == "text") {
@@ -175,7 +175,7 @@ function updateGameArea() {
         for (i = 0; i < myArrows.length; i += 1) {
           if (myCastles[j].crashWith(myArrows[i])) {
              myArrows[i].active=0;
-             myCastles[j].active = myCastles[j].active - 1 + myCastles[j].width;
+             myCastles[j].active = myCastles[j].active - 1;
              myCastles[j].image.src = "castle_" + myCastles[j].active.toString() + ".gif"
           }
         }
