@@ -13,6 +13,7 @@ canvas {
 <script>
 
 var iwon = 0;
+var gameover = 0;
 var maxhits = 5;
 var myGamePiece;
 var myArrows = [];
@@ -160,7 +161,11 @@ function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myArrows.length; i += 1) {
         if (myGamePiece.crashWith(myArrows[i])) {
-            if (myArrows[i].active == 1) {
+            if (myArrows[i].active ) {
+              gameover = 1;
+              myScore.text="SCORE: " + myGameArea.frameNo + " GAME OVER";
+              myScore.update();
+
               return;
             }
         } 
@@ -169,6 +174,7 @@ function updateGameArea() {
       for (i = 0; i < myArrows.length; i += 1) {
         if (myCastles[j].crashWith(myArrows[i])) {
            myArrows[i].active=0;
+           myCastles[j].active = myCastles[j].active - 1;
         }
       }
     }
@@ -245,6 +251,7 @@ function reset(){
     stopy()
     stopx()
     iwon=0;
+    gameover=0;
 }
 
 </script>
