@@ -186,7 +186,7 @@ function updateGameArea() {
     }
     if (myGameArea.frameNo == 1 || everyinterval(Math.floor(Math.random()*200))) {
         height = Math.floor(Math.random()*myGameArea.canvas.height);
-        myArrows.push(new component(arrowsizex, arrowsizey, "arrow.gif", myGameArea.canvas.width-1, height,"image"));
+        myArrows.push(new component(arrowsizex, arrowsizey, "arrow_1.gif", myGameArea.canvas.width-1, height,"image"));
         myArrows[myArrows.length-1].active=1;
     }
     for (i = 0; i < myCastles.length; i += 1) {
@@ -205,7 +205,7 @@ function updateGameArea() {
 function addLineOfCastles(n,x) {
     for  (i = 0; i < n; i += 1) {
         y = Math.floor(i*myGameArea.canvas.height/n)
-        myCastles.push(new component(Math.floor(castlesizex*3/n), Math.floor(castlesizey*3/n), "castle.gif", x, y,"image"));
+        myCastles.push(new component(Math.floor(castlesizex*3/n), Math.floor(castlesizey*3/n), "castle_1.gif", x, y,"image"));
     }
 }
 
