@@ -30,13 +30,6 @@ function startGame() {
     myGameArea.start();
 }
 
-function setCastles() {
-    n = 1;
-    for (i = 0; i < n; i += 1) {
-        myCastles.push(new component(10, 30, "blue", sizex*2, canvasy/2))
-    }
-}
-
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
