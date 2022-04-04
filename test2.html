@@ -57,6 +57,10 @@ var myGameArea = {
         },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.drawImage(myField.image,
+                  this.x,
+                  this.y,
+                  this.width, this.height);
     }
 }
 
@@ -169,6 +173,7 @@ function updateGameArea() {
     }
 
     myGameArea.clear();
+
     if (iwon == 0 ) {
         myGameArea.frameNo += 1;
     }
