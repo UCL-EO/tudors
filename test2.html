@@ -43,7 +43,8 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
-        addLineOfCastles(3,100)
+        nCastles = Math.floor(Math.random()*5)
+        addLineOfCastles(nCastles,100)
         },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -177,7 +178,7 @@ function updateGameArea() {
 function addLineOfCastles(n,x) {
     for  (i = 0; i < n; i += 1) {
         y = Math.floor(i*myGameArea.canvas.height/n)
-        myCastles.push(new component(castlesizex, castlesizey, "red", x, y));
+        myCastles.push(new component(Math.floor(castlesizex*5/n), Math.floor(castlesizey*5/n), "red", x, y));
     }
 }
 
