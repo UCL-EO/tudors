@@ -144,6 +144,10 @@ function component(width, height, color, x, y, type) {
             myScore.text="SCORE: " + myGameArea.frameNo + " YOU WON";
             myScore.update();
             iwon=1;
+
+            for (i = 0; i < myArrows.length; i += 1) {
+                myArrows[i].active = 0
+            }
  
         }
     }
