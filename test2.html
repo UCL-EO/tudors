@@ -22,6 +22,8 @@ var sizex = 268/4;
 var sizey = 170/4;
 var arrowsizex = 20;
 var arrowsizey = 4;
+var castlesizex = 100;
+var castlesizey = 100;
 var canvasx = 480*2;
 var canvasy = 270*2;
 
@@ -159,6 +161,13 @@ function updateGameArea() {
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
+}
+
+function addLineOfCastles(n,x) {
+    for  (i = 0; i < n; i += 1) {
+        y = Math.floor(myGameArea.canvas.height/n)
+        myCastles.push(new component(castlesizex, castlesizey, "gray", x, y));
+    }
 }
 
 function everyinterval(n) {
