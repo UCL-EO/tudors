@@ -13,7 +13,7 @@ canvas {
 <script>
 
 var myGamePiece;
-var myObstacles = [];
+var myArrows = [];
 var myScore;
 var startx=10;
 var starty = 120;
@@ -129,8 +129,8 @@ function component(width, height, color, x, y, type) {
 
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
-    for (i = 0; i < myObstacles.length; i += 1) {
-        if (myGamePiece.crashWith(myObstacles[i])) {
+    for (i = 0; i < myArrows.length; i += 1) {
+        if (myGamePiece.crashWith(myArrows[i])) {
             return;
         } 
     }
@@ -144,12 +144,12 @@ function updateGameArea() {
         minGap = 50;
         maxGap = 200;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myObstacles.push(new component(10, height, "green", x, 0));
-        myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+        myArrows.push(new component(10, height, "green", x, 0));
+        myArrows.push(new component(10, x - height - gap, "green", x, height + gap));
     }
-    for (i = 0; i < myObstacles.length; i += 1) {
-        myObstacles[i].x += -1;
-        myObstacles[i].update();
+    for (i = 0; i < myArrows.length; i += 1) {
+        myArrows[i].x += -1;
+        myArrows[i].update();
     }
     myScore.text="SCORE: " + myGameArea.frameNo;
     myScore.update();
@@ -195,7 +195,7 @@ function reset(){
     myGamePiece.x = startx;
     myGamePiece.y = starty;
     myGameArea.frameNo = 1;
-    myObstacles = [];
+    myArrows = [];
     stopy()
     stopx()
 }
