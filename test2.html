@@ -12,6 +12,7 @@ canvas {
 <body onload="startGame()">
 <script>
 
+var maxhits = 5;
 var myGamePiece;
 var myArrows = [];
 var myCastles = [];
@@ -67,7 +68,7 @@ function component(width, height, color, x, y, type) {
     this.gravity = 0;
     this.gravitySpeed = 0;
     this.color=color;
-    this.active=1;
+    this.active=maxhits;
     this.update = function() {
         ctx = myGameArea.context;
         if (this.type == "text") {
@@ -75,7 +76,7 @@ function component(width, height, color, x, y, type) {
             ctx.fillStyle = this.color;
             ctx.fillText(this.text, this.x, this.y);
         } else if (this.type == "image") {
-              if ( this.active ) {
+              if ( this.active) {
                 ctx.drawImage(this.image, 
                   this.x, 
                   this.y,
