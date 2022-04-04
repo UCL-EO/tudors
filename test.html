@@ -14,6 +14,7 @@ canvas {
 
 var myGamePiece;
 var myArrows = [];
+var myCastles = [];
 var myScore;
 var startx=10;
 var starty = 120;
@@ -27,6 +28,13 @@ function startGame() {
     myGamePiece.gravity = 0.00;
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
     myGameArea.start();
+}
+
+function setCastles() {
+    n = 1;
+    for (i = 0; i < n; i += 1) {
+        myCastles.push(new component(10, 30, "blue", sizex*2, canvasy/2))
+    }
 }
 
 var myGameArea = {
@@ -133,6 +141,14 @@ function updateGameArea() {
         if (myGamePiece.crashWith(myArrows[i])) {
             return;
         } 
+    }
+    for (j = 0; j < myCastles.length; j += 1) {
+        for (i = 0; i < myArrows.length; i += 1) {
+            if (myCastles[j].crashWith(myArrows[i])) {
+                # delete myArrows[i]
+                myArrows[i].pop()
+            }
+        }
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
