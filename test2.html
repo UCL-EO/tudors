@@ -135,6 +135,14 @@ function updateGameArea() {
             return;
         } 
     }
+    for (j = 0; j < myCastles.length; j += 1) {
+      for (i = 0; i < myArrows.length; i += 1) {
+        if (myCastles[j].crashWith(myArrows[i])) {
+           myArrows[i].pop()
+        }
+      }
+    }
+
     myGameArea.clear();
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
