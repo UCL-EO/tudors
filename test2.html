@@ -82,7 +82,7 @@ function component(width, height, color, x, y, type) {
     this.gravity = 0;
     this.gravitySpeed = 0;
     this.color=color;
-    this.active=maxhits*width;
+    this.active=maxhits;
     this.update = function() {
         ctx = myGameArea.context;
         if (this.type == "text") {
