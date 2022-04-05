@@ -44,18 +44,6 @@ function startGame() {
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
-    mouse : document.addEventListener("mousemove", function(event) {
-        if (event.movementY > 0) {
-          up(event.movementY);
-        } else {
-          down(-event.movementY);
-        } 
-        if (event.movementX > 0) {
-          left(event.movementX);
-        } else {
-          right(-event.movementX);
-        } 
-    }),
     keyboard : document.addEventListener("keydown", function(event) {
         if (event.key == "d") {
           left(1);
@@ -303,6 +291,11 @@ function reset(){
 }
 
 </script>
+<button onmousedown="up()" onmouseup="stopy()" ontouchstart="up()">UP</button>
+<button onmousedown="down()" onmouseup="stopy()" ontouchstart="down()">DOWN</button>
+<button onmousedown="left()" onmouseup="stopx()" ontouchstart="left()">LEFT</button>
+<button onmousedown="right()" onmouseup="stopx()" ontouchstart="right()">RIGHT</button>
+
 <button onmousedown="reset()">reset</button>
 
 <p>Meet the Tudors</p>
