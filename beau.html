@@ -74,7 +74,8 @@ var myGameArea = {
         addLineOfCastles(nCastles,Math.floor(canvasx*0.5))
         nCastles = Math.floor(Math.random()*6)+2
         addLineOfCastles(nCastles,Math.floor(canvasx*0.7))
-
+        var audio = new Audio('audio_file.mp3');
+        audio.play();
         },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
