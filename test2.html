@@ -279,6 +279,11 @@ function stopx(n) {
     myGamePiece.speedX = 0;
 }
 
+function stop(n) {
+    stopx(n)
+    stopy(n)
+}
+
 function stopy(n) {
     myGamePiece.speedY = 0;
 }
@@ -296,12 +301,13 @@ function reset(){
 
 </script>
 <br>
-</center>
-<button onmousedown="up(1)" onmouseover="up(1)" onmouseup="stopy()" ontouchstart="up(1)">UP</button>
+<center>
+<button onmousedown="up(1)" onmouseover="up(1)" onmouseup="stopy()" ontouchstart="up(1)">UP</button><br>
 <button onmousedown="down(1)" onmouseover="down(1)" onmouseup="stopy()" ontouchstart="down(1)">DOWN</button>
-<button onmousedown="left(1)" onmouseover="left(1)" onmouseup="stopx()" ontouchstart="left(1)">LEFT</button>
+<button onmousedown="left(1)" onmouseover="left(1)" onmouseup="stopx()" ontouchstart="left(1)">LEFT</button><br>
 <button onmousedown="right(1)" onmouseover="right(1)" onmouseup="stopx()" ontouchstart="right(1)">RIGHT</button>
-
+<br>
+<button onmouseover="stop()">STOP</button>
 <button onmousedown="reset()">reset</button>
 
 <p>Meet the Tudors</p>
