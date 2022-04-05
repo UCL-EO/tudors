@@ -34,10 +34,14 @@ var test=0;
 var speedscale = 600
 
 function startGame() {
+    // game pieces
     myField = new component(canvasx,canvasy,"background.gif",0,0,"image");
+    // my character
     myGamePiece = new component(sizex, sizey, "soldier.gif", startx, starty, "image");
     myGamePiece.gravity = 0.00;
+    // game over msgs
     myGame = new component("100px", "Consolas", "red", canvasx/4, canvasy/2, "text");
+    // score
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
     myGameArea.start();
 }
@@ -255,19 +259,19 @@ function maxy(n) {
 }
 
 
-function up(n) {
+function down(n) {
     myGamePiece.speedY = maxy(n);
 }
 
-function down(n) {
+function up(n) {
     myGamePiece.speedY = -maxy(-n);
 }
 
-function right(n) {
+function left(n) {
     myGamePiece.speedX = -maxx(-n);
 }
 
-function left(n) {
+function right(n) {
     myGamePiece.speedX = maxx(n);
 }
 
@@ -291,10 +295,12 @@ function reset(){
 }
 
 </script>
-<button onmousedown="up()" onmouseup="stopy()" ontouchstart="up()">UP</button>
-<button onmousedown="down()" onmouseup="stopy()" ontouchstart="down()">DOWN</button>
-<button onmousedown="left()" onmouseup="stopx()" ontouchstart="left()">LEFT</button>
-<button onmousedown="right()" onmouseup="stopx()" ontouchstart="right()">RIGHT</button>
+<br>
+</center>
+<button onmousedown="up(1)" onmouseover="up(1)" onmouseup="stopy()" ontouchstart="up(1)">UP</button>
+<button onmousedown="down(1)" onmouseover="down(1)" onmouseup="stopy()" ontouchstart="down(1)">DOWN</button>
+<button onmousedown="left(1)" onmouseover="left(1)" onmouseup="stopx()" ontouchstart="left(1)">LEFT</button>
+<button onmousedown="right(1)" onmouseover="right(1)" onmouseup="stopx()" ontouchstart="right(1)">RIGHT</button>
 
 <button onmousedown="reset()">reset</button>
 
