@@ -10,11 +10,6 @@ canvas {
 </style>
 </head>
 <body onload="startGame()">
-<audio id="myAudio" controls>
-  <source src="greensleeves-flute-and-guitar.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
 
 <script>
 
@@ -23,6 +18,7 @@ var gameover = 0;
 var maxhits = 6;
 var myGamePiece;
 var myArrows = [];
+var myBullets = [];
 var myCastles = [];
 var myScore;
 var startx=10;
@@ -162,6 +158,10 @@ function component(width, height, color, x, y, type) {
             for (i = 0; i < myArrows.length; i += 1) {
                 myArrows[i].active = 0
             }
+            for (i = 0; i < myBullets.length; i += 1) {
+                myBullets[i].active = 0
+            }
+
  
         }
     }
@@ -205,6 +205,20 @@ function updateGameArea() {
             }
         } 
     }
+
+    // check if bullets collide with castles
+    for (j = 0; j < myCastles.length; j += 1) {
+      if ( myCastles[j].active > 0) {
+        for (i = 0; i < myBullets.length; i += 1) {
+          if (myBullets[i].active && myCastles[j].crashWith(myBullets[i],0)) {
+             myBullets[i].active=0;
+             myCastles[j].active = myCastles[j].active - 1;
+             myCastles[j].image.src = "castle_" + (maxhits - myCastles[j].active + 1).toString() + ".gif"
+          }
+        }
+      }
+    }
+
     // check if arrows collide with castles
     for (j = 0; j < myCastles.length; j += 1) {
       if ( myCastles[j].active > 0) {
@@ -217,6 +231,21 @@ function updateGameArea() {
         }
       }
     }
+
+    // check if bullets collide with arrows
+    for (j = 0; j < myArrows.length; j += 1) {
+      if ( myArrows[j].active > 0) {
+        for (i = 0; i < myBullets.length; i += 1) {
+          if (myBullets[i].active && myArrows[j].crashWith(myBullets[i],0)) {
+             // explosion
+             myBullets[i].active=0;
+             myArrows[j].active =0;
+          }
+        }
+      }
+    }
+
+
     // check if myGamePiece collides with castles
     for (j = 0; j < myCastles.length; j += 1) {
       if ( myCastles[j].active > 0) {
@@ -243,6 +272,10 @@ function updateGameArea() {
     for (i = 0; i < myArrows.length; i += 1) {
         myArrows[i].x += -1;
         myArrows[i].update();
+    }
+    for (i = 0; i < myBullets.length; i += 1) {
+        myBullets[i].x += 2;
+        myBullets[i].update();
     }
     myScore.text="SCORE: " + myGameArea.frameNo;
     myScore.update();
@@ -306,6 +339,11 @@ function stopy(n) {
     myGamePiece.speedY = 0;
 }
 
+function fire() {
+  myBullets.push(new component(arrowsizex, arrowsizey, "barrow_1.gif", myGamePiece.x+1, myGamePiece.y,"image"));
+  myBullets[myBullets.length-1].active=maxhits;
+}
+
 function reset(){
     myGamePiece.x = startx;
     myGamePiece.y = starty;
@@ -328,8 +366,15 @@ function reset(){
 <br>
 <button onmouseover="stop()">STOP</button>
 <button onmousedown="reset()">reset</button>
-
+<button onmouseover="fire()">FIRE</button>
 <p>Meet the Tudors</p>
+
+<audio id="myAudio" controls>
+  <source src="greensleeves-flute-and-guitar.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+
 
 </body>
 </html>
