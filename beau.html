@@ -366,7 +366,7 @@ function reset(){
 <br>
 <button onmouseover="stop()">STOP</button>
 <button onmousedown="reset()">reset</button>
-<button onmouseover="fire()">FIRE</button>
+<button onmouseover="fire()" onmousedown="fire()" onmouseup="fire()" ontouchstart="fire()">FIRE</button>
 <p>Meet the Tudors</p>
 
 <audio id="myAudio" controls>
