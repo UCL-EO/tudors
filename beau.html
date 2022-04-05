@@ -238,6 +238,10 @@ function updateGameArea() {
         for (i = 0; i < myBullets.length; i += 1) {
           if (myBullets[i].active && myArrows[j].crashWith(myBullets[i],0)) {
              // explosion
+             myBullets[j].image.src = "arrow_explode.gif"
+             myArrows[j].image.src = "arrow_explode.gif"
+             myBullets[i].update();
+             myArrows[j].update();
              myBullets[i].active=0;
              myArrows[j].active =0;
           }
