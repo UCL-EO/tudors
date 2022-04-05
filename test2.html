@@ -30,27 +30,42 @@ var castlesizey = 100;
 var canvasx = Math.floor(6144/6);
 var canvasy = Math.floor(3072/6);
 var buffer = 20;
+var test=0;
+var speedscale = 600
 
 function startGame() {
     myField = new component(canvasx,canvasy,"background.gif",0,0,"image");
     myGamePiece = new component(sizex, sizey, "soldier.gif", startx, starty, "image");
     myGamePiece.gravity = 0.00;
-    myScore = new component("30px", "Consolas", "red", 280, 40, "text");
+    myGame = new component("100px", "Consolas", "red", canvasx/4, canvasy/2, "text");
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
     myGameArea.start();
 }
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
+    mouse : document.addEventListener("mousemove", function(event) {
+        if (event.movementY > 0) {
+          up(event.movementY);
+        } else {
+          down(-event.movementY);
+        } 
+        if (event.movementX > 0) {
+          left(event.movementX);
+        } else {
+          right(-event.movementX);
+        } 
+    }),
     keyboard : document.addEventListener("keydown", function(event) {
-        if (event.key === "d") {
-          left();
-        } else if (event.key === "w") {
-          up();
-        } else if (event.key === "s") {
-          down();
-        } else if (event.key === "a") {
-          right();
-        } else if (event.key === "q") {
+        if (event.key == "d") {
+          left(1);
+        } else if (event.key == "w") {
+          up(1);
+        } else if (event.key == "s") {
+          down(1);
+        } else if (event.key == "a") {
+          right(1);
+        } else if (event.key == "q") {
           reset();
         }
     }),
@@ -141,8 +156,10 @@ function component(width, height, color, x, y, type) {
         if (this.x > rockbottom) {
             this.x = rockbottom;
             this.gravitySpeed = 0;
-            myScore.text="SCORE: " + myGameArea.frameNo + " YOU WON";
+            myScore.text="SCORE: " + myGameArea.frameNo;
             myScore.update();
+            myGame.text="YOU WIN"
+            myGame.update();
             iwon=1;
 
             for (i = 0; i < myArrows.length; i += 1) {
@@ -180,9 +197,10 @@ function updateGameArea() {
         if (myGamePiece.crashWith(myArrows[i])) {
             if (myArrows[i].active ) {
               gameover = 1;
-              myScore.text="SCORE: " + myGameArea.frameNo + " GAME OVER";
+              myScore.text="SCORE: " + myGameArea.frameNo;
               myScore.update();
-
+              myGame.text="GAME OVER"
+              myGame.update();
               return;
             }
         } 
@@ -238,21 +256,31 @@ function accelerate(n) {
     myGamePiece.gravity = n;
 }
 
+function maxx(n) {
+    var nn = Math.abs(n)
+    return Math.min(Math.abs(n),canvasx/speedscale)
+}
+
+function maxy(n) {
+    var nn = Math.abs(n)
+    return Math.min(Math.abs(n),canvasy/speedscale)
+}
+
 
 function up(n) {
-    myGamePiece.speedY = -1;
+    myGamePiece.speedY = maxy(n);
 }
 
 function down(n) {
-    myGamePiece.speedY = 1;
+    myGamePiece.speedY = -maxy(-n);
 }
 
 function right(n) {
-    myGamePiece.speedX = -1;
+    myGamePiece.speedX = -maxx(-n);
 }
 
 function left(n) {
-    myGamePiece.speedX = 1;
+    myGamePiece.speedX = maxx(n);
 }
 
 function stopx(n) {
@@ -275,10 +303,6 @@ function reset(){
 }
 
 </script>
-<br><center>
-<button onmousedown="up()" onmouseup="stopy()">UP</button>
-<button onmousedown="right()" onmouseup="stopy()">L</button>
-<button onmousedown="left()" onmouseup="stopy()">R</button> <button onmousedown="down()" onmouseup="stopy()">DOWN</button>
 <button onmousedown="reset()">reset</button>
 
 <p>Meet the Tudors</p>
