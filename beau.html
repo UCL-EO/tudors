@@ -9,27 +9,39 @@ canvas {
 }
 </style>
 </head>
+
 <body onload="startGame()">
 
 <script>
 
+
 var gameover = 0;
+// max hits for castles
 var maxhits = 6;
-var maxlives = 4;
+// max lives
+var maxlives = 3;
+
+// the pieces
 var myGamePiece;
 var yourGamePiece;
+
+// interval between frames
+var interval = 20
+// image scale
+var scale = 1
 
 var myScore=0;
 var startx=10;
 var starty = 120;
+// the avatar size
 var sizex = Math.floor(879/30);
 var sizey = Math.floor(1125/30);
 var arrowsizex = 5*2;
 var arrowsizey = 5*2;
 var barrowsizex = 25*2;
 var barrowsizey = 5*2;
-var castlesizex = Math.floor(100);
-var castlesizey = Math.floor(100);
+var castlesizex = Math.floor(1536/20);
+var castlesizey = Math.floor(1536/20);
 var canvasx = Math.floor(6144/6);
 var canvasy = Math.floor(3072/6);
 var buffer = 20;
@@ -37,21 +49,32 @@ var maxArrows = 3;
 var maxEnemyArrows = 50;
 var test=0;
 var speedscale = 600
+var myAvatarFile = "soldier.gif" 
+var yourAvatarFile = "soldier.gif" 
+var backgroundFile = "background.gif"
+
+var yourAvatarCastleFile = "castle_1.gif"
+var myAvatarCastleFile = "castle_1.gif"
+
+var myScoreLocation = [280, 40]
+var myLifeLocation = [280, 80]
+
 
 function startGame() {
+
     // game pieces
-    myField = new component(canvasx,canvasy,"background.gif",0,0,"image",0);
+    myField = new component(canvasx,canvasy,backgroundFile,0,0,"image",0);
     // my character
-    myGamePiece = new component(sizex, sizey, "soldier.gif", startx, starty, "image",1);
+    myGamePiece = new component(sizex, sizey, myAvatarFile, startx, starty, "image",1);
     // your character
-    yourGamePiece = new component(sizex, sizey, "soldier.gif", canvasx - startx - sizex - 1, 0, "image",1);
+    yourGamePiece = new component(sizex, sizey, yourAvatarFile, canvasx - startx - sizex - 1, 0, "image",1);
     // game over msgs
     myGame = new component("100px", "Consolas", "red", canvasx/4, canvasy/2, "text",0);
     myGame.text = "";
     // score
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text",0);
+    myScore = new component("30px", "Consolas", "black", myScoreLocation[0], myScoreLocation[1], "text",0);
     // Lives
-    myLife = new component("30px", "Consolas", "black", 280, 80, "text",0);
+    myLife = new component("30px", "Consolas", "black", myLifeLocation[0], myLifeLocation[1], "text",0);
     myLife.text="❤️".repeat(myGamePiece.lives)
 
     myGameArea.start();
@@ -81,10 +104,10 @@ var myGameArea = {
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
         nCastles = Math.floor(Math.random()*6)+2
-        addLineOfCastles(myGamePiece,nCastles,Math.floor(canvasx*0.1),castlesizex,castlesizey,"castle_1.gif")
+        addLineOfCastles(myGamePiece,nCastles,Math.floor(canvasx*0.1),castlesizex,castlesizey,myAvatarCastleFile)
 
         nCastles = 10
-        addLineOfCastles(yourGamePiece,nCastles,Math.floor(canvasx*0.9-castlesizex/4),castlesizex,castlesizey,"castle_1.gif")
+        addLineOfCastles(yourGamePiece,nCastles,Math.floor(canvasx*0.9-castlesizex/4),castlesizex,castlesizey,yourAvatarCastleFile)
 
         //nCastles = Math.floor(Math.random()*6)+2
         //addLineOfCastles(nCastles,Math.floor(canvasx*0.5))
@@ -296,7 +319,7 @@ function component(width, height, color, x, y, type, direction) {
     this.removeCastle = function(castle) {
         // remove a castle life
         castle.active -= 1;
-        castle.image.src = "castle_" + (maxhits - castle.active + 1).toString() + ".gif"
+        castle.image.src = "castle" + "_" + (maxhits - castle.active).toString() + ".gif"
     }
     this.remove = function(bullet,castle) {
         // remove a life
@@ -509,7 +532,7 @@ function updateGameArea() {
 
     yourGamePiece.speedY = Math.floor(Math.random()*5)+1
 
-    yourGamePiece.y += yourGamePiece.direction * yourGamePiece.speedY
+    yourGamePiece.y +=  yourGamePiece.speedY
     yourGamePiece.update();
     if ( yourGamePiece.y > canvasy ) {
         yourGamePiece.y = 0
@@ -540,7 +563,7 @@ function updateGameArea() {
 
 function addLineOfCastles(myPiece,n,x,sizex,sizey,gif) {
     for  (i = 0; i < n; i += 1) {
-        y = Math.floor(i*myGameArea.canvas.height/n)
+        y = Math.floor(i*myGameArea.canvas.height/n + sizey/4)
         myPiece.myCastles.push(new component(Math.floor(sizex*3/n), Math.floor(sizey*3/n), gif, x, y,"image",1));
     }
 }
