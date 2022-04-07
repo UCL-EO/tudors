@@ -19,7 +19,7 @@ var maxlives = 4;
 var myGamePiece;
 var yourGamePiece;
 
-var myScore;
+var myScore=0;
 var startx=10;
 var starty = 120;
 var sizex = Math.floor(879/30);
@@ -28,34 +28,37 @@ var arrowsizex = 5*2;
 var arrowsizey = 5*2;
 var barrowsizex = 25*2;
 var barrowsizey = 5*2;
-var castlesizex = 100;
-var castlesizey = 100;
+var castlesizex = Math.floor(100);
+var castlesizey = Math.floor(100);
 var canvasx = Math.floor(6144/6);
 var canvasy = Math.floor(3072/6);
 var buffer = 20;
+var maxArrows = 3;
+var maxEnemyArrows = 50;
 var test=0;
 var speedscale = 600
 
 function startGame() {
     // game pieces
-    myField = new component(canvasx,canvasy,"background.gif",0,0,"image");
+    myField = new component(canvasx,canvasy,"background.gif",0,0,"image",0);
     // my character
-    myGamePiece = new component(sizex, sizey, "soldier.gif", startx, starty, "image");
+    myGamePiece = new component(sizex, sizey, "soldier.gif", startx, starty, "image",1);
     // your character
-    yourGamePiece = new component(sizex, sizey, "soldier.gif", canvasx - startx, starty, "image");
+    yourGamePiece = new component(sizex, sizey, "soldier.gif", canvasx - startx - sizex - 1, 0, "image",1);
     // game over msgs
-    myGame = new component("100px", "Consolas", "red", canvasx/4, canvasy/2, "text");
+    myGame = new component("100px", "Consolas", "red", canvasx/4, canvasy/2, "text",0);
     myGame.text = "";
     // score
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text",0);
     // Lives
-    myLife = new component("30px", "Consolas", "black", 280, 80, "text");
+    myLife = new component("30px", "Consolas", "black", 280, 80, "text",0);
     myLife.text="❤️".repeat(myGamePiece.lives)
 
     myGameArea.start();
 }
 
 var myGameArea = {
+    score : 0,
     canvas : document.createElement("canvas"),
     keyboard : document.addEventListener("keydown", function(event) {
         if (event.key == "d") {
@@ -78,11 +81,15 @@ var myGameArea = {
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
         nCastles = Math.floor(Math.random()*6)+2
-        addLineOfCastles(nCastles,Math.floor(canvasx*0.2))
-        nCastles = Math.floor(Math.random()*6)+2
-        addLineOfCastles(nCastles,Math.floor(canvasx*0.5))
-        nCastles = Math.floor(Math.random()*6)+2
-        addLineOfCastles(nCastles,Math.floor(canvasx*0.7))
+        addLineOfCastles(myGamePiece,nCastles,Math.floor(canvasx*0.1),castlesizex,castlesizey,"castle_1.gif")
+
+        nCastles = 10
+        addLineOfCastles(yourGamePiece,nCastles,Math.floor(canvasx*0.9-castlesizex/4),castlesizex,castlesizey,"castle_1.gif")
+
+        //nCastles = Math.floor(Math.random()*6)+2
+        //addLineOfCastles(nCastles,Math.floor(canvasx*0.5))
+        //nCastles = Math.floor(Math.random()*6)+2
+        //addLineOfCastles(nCastles,Math.floor(canvasx*0.7))
         },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -101,8 +108,9 @@ var myGameArea = {
 // The rules are:
 // - Bullets can destroy Castles
 
-function component(width, height, color, x, y, type) {
+function component(width, height, color, x, y, type, direction) {
     this.type = type;
+    this.startdirection = direction;
     if (type == "image") {
         this.image = new Image();
         this.image.src = color;
@@ -120,6 +128,7 @@ function component(width, height, color, x, y, type) {
     this.reset = function() {
         this.myBullets = [];
         this.score = 0;
+        this.direction = this.startdirection;
         this.x = this.startx;
         this.y = this.starty;
         this.width = this.startwidth;
@@ -161,6 +170,29 @@ function component(width, height, color, x, y, type) {
         this.hitLeft(isPiece);
         this.hitRight(isPiece);
     }
+    this.clearArrows = function() {
+        var test;
+        var newList = [];
+        for (i = 0; i < this.myBullets.length; i += 1) {
+            test = this.myBullets[i]
+            if (test.x < 0 || test.x > canvasx ) test.active = 0
+            if ( test.active > 0 ) {
+                newList.push(test);
+            }
+        }
+        this.myBullets = newList
+    }
+    this.bounceBottom = function(){
+        var rockbottom = myGameArea.canvas.height - this.height;
+        if (this.y > rockbottom) {
+             this.direction = 1 - this.direction
+        }
+    }
+    this.bounceTop = function(){
+        if (this.y < 0) {
+             this.direction = 1 - this.direction
+        }
+    }
     this.hitBottom = function(isPiece) {
         var rockbottom = myGameArea.canvas.height - this.height;
         if (this.y > rockbottom) {
@@ -182,9 +214,10 @@ function component(width, height, color, x, y, type) {
     }
     // what happens when you win
     this.win = function() {
-        myScore.text="SCORE: " + myGameArea.frameNo;
+        gameover=1
+        myScore.text="SCORE: " + myGameArea.score;
         myScore.update();
-        myGame.text="YOU WIN"
+        myGame.text="YOU WIN" 
         myGame.update();
         this.iwon=1;
         for (i = 0; i < this.myBullets.length; i += 1) {
@@ -228,8 +261,11 @@ function component(width, height, color, x, y, type) {
     }
     // fire and add to myBullets
     this.fire = function() {
-        this.myBullets.push(new component(barrowsizex, barrowsizey, "barrow_1.gif",this.x,this.y,"image"));
-        this.myBullets[this.myBullets.length-1].active=maxhits;
+        this.clearArrows()
+        if ( this.myBullets.length < maxArrows ) {
+            this.myBullets.push(new component(barrowsizex, barrowsizey, "barrow_1.gif",this.x,this.y+Math.random()*30,"image"));
+            this.myBullets[this.myBullets.length-1].active=maxhits;
+        }
     }
     this.down = function(n) {
         this.speedY = maxy(n);
@@ -282,6 +318,9 @@ function component(width, height, color, x, y, type) {
                 if (that.myBullets[j].crashWith(this.myBullets[i],0)) {
                     this.removeBullet(this.myBullets[i])
                     that.removeBullet(that.myBullets[j])
+                    myGameArea.score += 10
+                    myGame.text="GREAT SHOT"
+                    myGame.update();
                 }
             }
         }
@@ -290,6 +329,9 @@ function component(width, height, color, x, y, type) {
             for (i = 0; i < this.myBullets.length; i += 1) {
                 if (that.myCastles[j].crashWith(this.myBullets[i],0)) {
                     this.remove(this.myBullets[i],that.myCastles[j])
+                    myGameArea.score += 1
+                    myGame.text="DAMAGE"
+                    myGame.update();
                 }
             }
         }
@@ -298,6 +340,15 @@ function component(width, height, color, x, y, type) {
             for (i = 0; i < that.myBullets.length; i += 1) {
                 if (this.myCastles[j].crashWith(that.myBullets[i],0)) {
                     that.remove(that.myBullets[i],this.myCastles[j])
+                }
+            }
+        }
+        // check if your castles collide with your castles
+        for (j = 0; j < that.myCastles.length; j += 1) {
+            for (i = 0; i < this.myCastles.length; i += 1) {
+                if (that.myCastles[j].crashWith(this.myCastles[i],0)) {
+                    that.removeCastle(this.myCastles[i])
+                    that.removeCastle(that.myCastles[j])
                 }
             }
         }
@@ -311,6 +362,7 @@ function amIHit(myPiece,yourPiece) {
     for (i = 0; i < yourPiece.myBullets.length; i += 1) {
         if (myPiece.crashWith(yourPiece.myBullets[i],0)) {
             myPiece.lives = myPiece.lives - 1;
+            myGame.text="YOU'RE HIT"
             myLife.text="❤️".repeat(myPiece.lives)
             myLife.update();
             yourPiece.myBullets[i].active = 0
@@ -332,7 +384,7 @@ function amIHit(myPiece,yourPiece) {
     // collision tests for castles and arrows
     myPiece.bangTest(yourPiece)
 
-    // check if myPiece collides with castles
+    // check if myPiece collides with my castles
     // bounce back
     for (j = 0; j < myPiece.myCastles.length; j += 1) {
       if ( myPiece.myCastles[j].active > 0) {
@@ -342,57 +394,154 @@ function amIHit(myPiece,yourPiece) {
         }
       }
     }
+
+    // check if myPiece collides with your castles
+    // lose a life and bounce back
+    for (j = 0; j < yourPiece.myCastles.length; j += 1) {
+      if ( yourPiece.myCastles[j].active > 0) {
+        if (myPiece.crashWith(yourPiece.myCastles[j],buffer)) {
+          myPiece.stop()
+          myPiece.left(1)
+          myGame.text="YOU'RE HIT"
+          myPiece.lives = myPiece.lives - 1;
+          myLife.text="❤️".repeat(myPiece.lives)
+          myLife.update();
+          myPiece.removeCastle(yourPiece.myCastles[j])
+          if ( myPiece.lives < 1 ) {
+                // what happens if you lose
+                gameover = 1;
+                myPiece.iwon=0;
+                yourPiece.iwon=1;
+                for (i = 0; i < myPiece.myBullets.length; i += 1) {
+                    myPiece.myBullets[i].active = 0
+                }
+                myGame.text="GAME OVER"
+                myGame.update();
+                return true
+          }
+        }
+      }
+    }
     return false;
 }
 
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
 
+    if ( gameover == 1 ) return;
+
     // check if your arrows collide with myGamePiece
-    if ( amIHit(myGamePiece,yourGamePiece) ) {
-        return true
-    }
+    //if ( amIHit(myGamePiece,yourGamePiece) ) {
+    //    return true
+    //}
+    amIHit(myGamePiece,yourGamePiece)
 
     myGameArea.clear();
 
     if (myGamePiece.iwon == 0 ) {
         myGameArea.frameNo += 1;
     }
-    if (myGameArea.frameNo == 1 || everyinterval(Math.floor(Math.random()*200))) {
-        height = Math.floor(Math.random()*myGameArea.canvas.height);
-        yourGamePiece.myBullets.push(new component(arrowsizex, arrowsizey, "arrow_1.gif", myGameArea.canvas.width-1, height,"image"));
-        yourGamePiece.myBullets[yourGamePiece.myBullets.length-1].active=maxhits;
+
+    // fire my arrows from alien
+    if (myGameArea.frameNo == 1 || everyinterval(Math.floor(Math.random()*600))) {
+        myGame.text=""
+        yourGamePiece.clearArrows()
+        if ( yourGamePiece.myBullets.length <= maxEnemyArrows ) {
+            yourGamePiece.myBullets.push(new component(arrowsizex, arrowsizey, "arrow_1.gif", yourGamePiece.x, yourGamePiece.y+Math.random()*10 ,"image",-1));
+            yourGamePiece.myBullets[yourGamePiece.myBullets.length-1].active=1;
+        }
     }
+
     for (i = 0; i < myGamePiece.myCastles.length; i += 1) {
         myGamePiece.myCastles[i].update();
     }
+
+    for (i = 0; i < yourGamePiece.myCastles.length; i += 1) {
+        if (everyinterval(Math.floor(Math.random()*5000))) {
+            myGame.text=""
+            yourGamePiece.clearArrows()
+            if ( yourGamePiece.myBullets.length <= maxEnemyArrows ) {
+                yourGamePiece.myBullets.push(new component(arrowsizex, arrowsizey, "arrow_1.gif", yourGamePiece.myCastles[i].x, yourGamePiece.myCastles[i].y+Math.random()*10 ,"image",-1));
+                yourGamePiece.myBullets[yourGamePiece.myBullets.length-1].active=1;
+            }
+        }
+    }
+
+
+    for (i = 0; i < yourGamePiece.myCastles.length; i += 1) {
+        yourGamePiece.myCastles[i].update();
+    }
+
+    // move on your bullets
     for (i = 0; i < yourGamePiece.myBullets.length; i += 1) {
         yourGamePiece.myBullets[i].x += -1;
         yourGamePiece.myBullets[i].update();
     }
+
+    // move on my bullets
     for (i = 0; i < myGamePiece.myBullets.length; i += 1) {
         myGamePiece.myBullets[i].x += 2;
         myGamePiece.myBullets[i].update();
     }
 
+
+    // check if bullets collide with other object to get points
+    for (i = 0; i < myGamePiece.myBullets.length; i += 1) {
+        if (myGamePiece.myBullets[i].crashWith(yourGamePiece,0)) {
+            myGamePiece.removeBullet(myGamePiece.myBullets[i])
+            myGameArea.score += 100
+            myGame.text="BONUS 100"
+            myGame.update();
+            //myGame.text=""
+        }
+    }
+
     // advance the score and update
-    myScore.text="SCORE: " + myGameArea.frameNo;
+    myScore.text="SCORE: " + myGameArea.score;
     myScore.update();
 
     myLife.text="❤️".repeat(myGamePiece.lives)
     myLife.update();
 
     // move on the piece and update
-    myGamePiece.newPos(1);
+    myGamePiece.newPos(true);
     myGamePiece.update();
+
+    yourGamePiece.speedY = Math.floor(Math.random()*5)+1
+
+    yourGamePiece.y += yourGamePiece.direction * yourGamePiece.speedY
+    yourGamePiece.update();
+    if ( yourGamePiece.y > canvasy ) {
+        yourGamePiece.y = 0
+        // move on your castles
+        for (i = 0; i < yourGamePiece.myCastles.length; i += 1) {
+            yourGamePiece.myCastles[i].x -= Math.floor(castlesizex/4);
+            yourGamePiece.myCastles[i].update();
+        }
+
+    }
+    // test for lose
+    for (i = 0; i < yourGamePiece.myCastles.length; i += 1) {
+        if ( yourGamePiece.myCastles[i].x < -10 ) {
+            gameover = 1;
+            myGamePiece.iwon=0;
+            yourGamePiece.iwon=1;
+            for (i = 0; i < myGamePiece.myBullets.length; i += 1) {
+                myGamePiece.myBullets[i].active = 0
+            }
+            myGame.text="GAME OVER"
+            myGame.update();
+            return true
+        }
+    }
     myGame.update();
 
 }
 
-function addLineOfCastles(n,x) {
+function addLineOfCastles(myPiece,n,x,sizex,sizey,gif) {
     for  (i = 0; i < n; i += 1) {
         y = Math.floor(i*myGameArea.canvas.height/n)
-        myGamePiece.myCastles.push(new component(Math.floor(castlesizex*3/n), Math.floor(castlesizey*3/n), "castle_1.gif", x, y,"image"));
+        myPiece.myCastles.push(new component(Math.floor(sizex*3/n), Math.floor(sizey*3/n), gif, x, y,"image",1));
     }
 }
 
@@ -413,9 +562,11 @@ function maxy(n) {
 
 
 function reset(){
-    myGamePiece.reset()
-    myGameArea.frameNo = 1;
+    //myGamePiece.reset()
+    //myGameArea.frameNo = 1;
     gameover=0;
+    //myGameArea.score = 0;
+    startGame()
 }
 
 
