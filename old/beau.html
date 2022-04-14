@@ -31,6 +31,8 @@ var interval = 20
 var scale = 1
 
 var myScore=0;
+var arrowsizex = 5*2;
+var arrowsizey = 5*2;
 var buffer = 20;
 var maxArrows = 3;
 var maxEnemyArrows = 50;
@@ -49,98 +51,53 @@ var background = {
 
 
 var myAvatar = {
-  file : "henry.gif",
-  x    : 70,
-  y    : 70,
+  file : "soldier.gif",
+  x    : Math.floor(879/30),
+  y    : Math.floor(1125/30),
   startx : 10,
   starty : 120,
   shot : {
-    file : "arrow.gif",
-    x : 50,
-    y : 10,
-    direction : 1,
+    file : "cannon.gif",
+    x : 25*2,
+    y : 5*2
   },
   castle : {
     // root name for castle
     file : "castle",
-    x    : 77,
-    y    : 77,
-    direction : 0
+    x    : Math.floor(1536/20),
+    y    : Math.floor(1536/20)
   },
   type : "image",
   direction : 1
 };
 
 var yourAvatar = {
-  file : "horse_1.gif",
-  x    : 70,
-  y    : 70,
-  startx : background.x - myAvatar.x - 10,
+  file : "soldier.gif",
+  x    : Math.floor(879/30),
+  y    : Math.floor(1125/30),
+  startx : background.x - myAvatar.startx - Math.floor(879/30) - 1,
   starty : 0,
   shot : { 
-    file : "cannon.gif",
-    x : 10,
-    y : 10,
-    direction : -1
+    file : "arrow.gif",
+    x : 5*2,
+    y : 5*2
   },
   castle : {
-    file : "horse",
-    x    : 100,
-    y    : 100,
-    direction : -1
-  },
+    file : "castle",
+    x    : Math.floor(1536/20),
+    y    : Math.floor(1536/20)
+  }
   type : "image",
   direction : 1
 };
 
+var myGameText = 
+ 
+var myText = "This is the tudors"
 
-var myScoreSetup = {
-  font:  "30px Consolas", 
-  color : "black", 
-  x     :  280, 
-  y     :  40,
-  text  : ""
-}
-
-// text for game over etc
-var myGameSetup = {
-  font:  "100px Consolas",  
-  color : "red", 
-  x     :  background.x/4,
-  y     :  background.y/4,
-  text  : ""
-}
-
-// life indicator
-var myLifeSetup = {
-  font:  "30px Consolas",
-  color : "black",
-  x     :  280,
-  y     :  80,
-  text  : "❤️".repeat(maxlives)
-}
-
-// story text
-var myTextSetup = {
-  font:  "30px Consolas",
-  color : "black",
-  x     :  10,
-  y     :  10,
-  text  : "This is the tudors"
-}
-
-function translate_origin (obj,startx,starty) {
-  //var new_obj = {...obj}
-  var new_obj = {
-    file : obj.file,
-    x : obj.x,
-    y : obj.y,
-    direction : obj.direction
-  }
-  new_obj.startx = Math.floor(startx);
-  new_obj.starty = Math.floor(starty);
-  return new_obj
-}
+var myScoreLocation = [280, 40]
+var myLifeLocation = [280, 80]
+var myTextLocation = [10,10]
 
 function startGame() {
 
@@ -151,11 +108,13 @@ function startGame() {
     // your character
     yourGamePiece = new component(yourAvatar);
     // game over msgs
-    myGame = new text_component(myGameSetup);
+    myGame = new component("100px", "Consolas", "red", background.x/4, background.y/2, "text",0);
+    myGame.text = "";
     // score
-    myScore = new text_component(myScoreSetup);
+    myScore = new component("30px", "Consolas", "black", myScoreLocation[0], myScoreLocation[1], "text",0);
     // Lives
-    myLife = new text_component(myLifeSetup);
+    myLife = new component("30px", "Consolas", "black", myLifeLocation[0], myLifeLocation[1], "text",0);
+    myLife.text="❤️".repeat(myGamePiece.lives)
 
     myGameArea.start();
 }
@@ -200,26 +159,8 @@ var myGameArea = {
     }
 }
 
-function text_component(obj){
-    this.obj = obj;
-    //this.ctx = myGameArea.context;
-    this.x = this.obj.x;
-    this.y = this.obj.y;
-    this.font = this.obj.font;
-    this.color=this.obj.color;
-    this.reset = function() {
-        this.x = this.obj.x;
-        this.y = this.obj.y;
-        this.font = this.obj.font;
-        this.color=this.obj.color;
-    }
-    this.update = function() {
-        //this.font = this.font || "30px Consolas"
-        ctx = myGameArea.context
-        ctx.font = this.font;
-        ctx.fillStyle = this.color;
-        ctx.fillText(this.text, this.x, this.y);
-    }
+function text_component(width, height, color, x, y){
+
 }
 
 // component is an object
@@ -229,55 +170,60 @@ function text_component(obj){
 // The rules are:
 // - Bullets can destroy Castles
 
-function component(obj) {
-    this.image = new Image();
-    this.startfile = obj.file;
-    this.image.src = obj.file;
+function component(width, height, color, x, y, type, direction,obj) {
+    this.type = type;
+    this.startdirection = direction;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
     this.lives = maxlives; 
     this.startx = obj.startx;
     this.starty = obj.starty;
     this.startwidth = obj.x;
     this.startheight = obj.y;
+    this.startcolor=color;
     this.myCastles = [];
-    this.myBullets = [];
-
-    this.score = 0;
-    this.direction = obj.direction;
-    this.x = this.startx;
-    this.y = this.starty;
-    this.width = this.startwidth;
-    this.height = this.startheight;
-    this.speedX = 0;
-    this.speedY = 0;
-    this.image.src = this.startfile;
-    this.active=maxhits;
-    this.iwon = 0;
-    if (obj.shot) {
-      this.bullet = obj.shot;
-      this.castle = obj.castle;
+    if (obj) {
+      this.bullet = obj.shot.file;
+      this.castle = obj.castle.file;
     }
 
     this.reset = function() {
         this.myBullets = [];
         this.score = 0;
-        this.direction = obj.direction;
+        this.direction = this.startdirection;
         this.x = this.startx;
         this.y = this.starty;
         this.width = this.startwidth;
         this.height = this.startheight;
         this.speedX = 0;
         this.speedY = 0;  
-        this.image.src = this.startfile;
+        if (this.type == "image") {  
+            this.image.src = this.startcolor;
+        } else {
+            this.color=this.startcolor;
+        }
         this.active=maxhits;
         this.iwon = 0;
     }
+    this.reset()
     this.update = function() {
         ctx = myGameArea.context;
-        if ( this.active) {
-          ctx.drawImage(this.image, 
-            this.x, 
-            this.y,
-            this.width, this.height);
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = this.color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else if (this.type == "image") {
+              if ( this.active) {
+                ctx.drawImage(this.image, 
+                  this.x, 
+                  this.y,
+                  this.width, this.height);
+              }
+        } else {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
     this.newPos = function(isPiece) {
@@ -381,7 +327,7 @@ function component(obj) {
     this.fire = function() {
         this.clearArrows()
         if ( this.myBullets.length < maxArrows ) {
-            this.myBullets.push(new component(translate_origin(myAvatar.shot,this.x,this.y+Math.random()*70)));
+            this.myBullets.push(new component(myAvatar.shot.x, myAvatar.shot.y, myAvatar.shot.file,this.x,this.y+Math.random()*30,"image"));
             this.myBullets[this.myBullets.length-1].active=maxhits;
         }
     }
@@ -414,8 +360,7 @@ function component(obj) {
     this.removeCastle = function(castle) {
         // remove a castle life
         castle.active -= 1;
-        fileroot = castle.startfile.split("_")[0]
-        castle.image.src = fileroot + "_" + (maxhits - castle.active).toString() + ".gif"
+        castle.image.src = this.castle.file + "_" + (maxhits - castle.active).toString() + ".gif"
     }
     this.remove = function(bullet,castle) {
         // remove a life
@@ -566,11 +511,9 @@ function updateGameArea() {
         myGame.text=""
         yourGamePiece.clearArrows()
         if ( yourGamePiece.myBullets.length <= maxEnemyArrows ) {
-            // fire from your leader
-            yourGamePiece.myBullets.push(new component(translate_origin(yourAvatar.shot,yourGamePiece.x,yourGamePiece.y+Math.random()*10)));
+            yourGamePiece.myBullets.push(new component(arrowsizex, arrowsizey, "arrow.gif", yourGamePiece.x, yourGamePiece.y+Math.random()*10 ,"image",-1));
             yourGamePiece.myBullets[yourGamePiece.myBullets.length-1].active=1;
         }
-
     }
 
     for (i = 0; i < myGamePiece.myCastles.length; i += 1) {
@@ -581,11 +524,8 @@ function updateGameArea() {
         if (everyinterval(Math.floor(Math.random()*5000))) {
             myGame.text=""
             yourGamePiece.clearArrows()
-            x = yourGamePiece.myCastles[i].x
-            y = yourGamePiece.myCastles[i].y
             if ( yourGamePiece.myBullets.length <= maxEnemyArrows ) {
-                // fire from the castles
-                yourGamePiece.myBullets.push(new component(translate_origin(yourAvatar.shot,x,y+Math.random()*10)));
+                yourGamePiece.myBullets.push(new component(arrowsizex, arrowsizey, "arrow.gif", yourGamePiece.myCastles[i].x, yourGamePiece.myCastles[i].y+Math.random()*10 ,"image",-1));
                 yourGamePiece.myBullets[yourGamePiece.myBullets.length-1].active=1;
             }
         }
@@ -666,15 +606,7 @@ function addLineOfCastles(myPiece,n,x,sizex,sizey,gif) {
     gif = gif + "_1.gif"
     for  (i = 0; i < n; i += 1) {
         y = Math.floor(i*myGameArea.canvas.height/n + sizey/4)
-        // new castle obj
-        castle = {
-          file : gif,
-          x    : Math.floor(sizex*3/n),
-          y    : Math.floor(sizey*3/n),
-          startx : x,
-          starty : y
-        }
-        myPiece.myCastles.push(new component(castle));
+        myPiece.myCastles.push(new component(Math.floor(sizex*3/n), Math.floor(sizey*3/n), gif, x, y,"image",1));
     }
 }
 
