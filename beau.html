@@ -17,7 +17,8 @@ canvas {
 
 <script>
 // for testing
-const hobbit = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit­hole, and that means comfort.  It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube­shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats ­ the hobbit was fond of visitors. The tunnel wound on and on, going fairly but not quite straight into the side of the hill ­ The Hill, as all the people for many miles round called it ­ and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining­rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left­hand side (going in), for these were the only ones to have windows, deep­set round windows looking over his garden and meadows beyond, sloping down to the river."
+//const hobbit = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit­hole, and that means comfort.  It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube­shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats ­ the hobbit was fond of visitors. The tunnel wound on and on, going fairly but not quite straight into the side of the hill ­ The Hill, as all the people for many miles round called it ­ and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining­rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left­hand side (going in), for these were the only ones to have windows, deep­set round windows looking over his garden and meadows beyond, sloping down to the river."
+const hobbit = "In a hole"
 
 var level_up = 0
 var level = 1
@@ -27,7 +28,6 @@ var gameover = 0;
 var maxhits = 6;
 // max lives
 var maxlives = 3;
-var last_chance = 1
 // pause_count
 pause_count=100
 
@@ -95,13 +95,13 @@ var myAvatar = {
 
 // level 2
 var myAvatar2 = {
-  file : "philip2.gif",
+  file : "drake.gif",
   x    : 70,
   y    : 70,
   startx : 10,
   starty : 120,
   shot : {
-    file : "cannon.gif",
+    file : "ball.gif",
     x : 12,
     y : 12,
     direction : 1,
@@ -118,7 +118,7 @@ var myAvatar2 = {
 };
 
 var yourAvatar = {
-  file : "horse_1.gif",
+  file : "pierre.gif",
   x    : 70,
   y    : 70,
   startx : background.x - myAvatar.x - 10,
@@ -152,7 +152,7 @@ var yourAvatar2 = {
     direction : -1
   },
   castle : {
-    file : "englishship",
+    file : "spanishship",
     x    : 100,
     y    : 100,
     direction : -1
@@ -166,11 +166,11 @@ var myStorySetup = {
   color : "red",
   x     :  0,
   y     :  0,
-  text  : hobbit
+  text  : hobbit,
+  active : true
 }
 
 
-var storyFrame=myStorySetup
 var myAvatarFrame=myAvatar
 var yourAvatarFrame=yourAvatar
 var backgroundFrame=background
@@ -210,15 +210,6 @@ var myLifeSetup = {
   text  : "❤️".repeat(maxlives) + " " +  (level).toString()
 }
 
-// story text
-var myTextSetup = {
-  font:  "30px Consolas",
-  color : "black",
-  x     :  10,
-  y     :  10,
-  text  : "This is the tudors"
-}
-
 function translate_origin (obj,startx,starty) {
   //var new_obj = {...obj}
   var new_obj = {
@@ -233,6 +224,7 @@ function translate_origin (obj,startx,starty) {
 }
 
 // from https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
+// this doesnt seem to work
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -242,6 +234,11 @@ var wrapText = function (context, text, x, y, maxWidth, lineHeight) {
     var paragraphs = text.split("\n");
     var textLines = [];
 
+
+    x = Math.ceil(x)
+    y = Math.ceil(y)
+    maxWidth = Math.ceil(maxWidth)
+    lineHeight = Math.ceil(lineHeight)
     // Loop through paragraphs
     for (var p = 0; p < paragraphs.length; p++) {
         var line = "";
@@ -266,6 +263,8 @@ var wrapText = function (context, text, x, y, maxWidth, lineHeight) {
     // Move text up if centered vertically
     if (context.textBaseline === 'middle')
         y = y - ((textLines.length-1) * lineHeight) / 2;
+    if ( y < 1 ) y = 1;
+    if ( x < 1 ) x = 1;
 
     // Render text on canvas
     for (var tl = 0; tl < textLines.length; tl++) {
@@ -274,23 +273,11 @@ var wrapText = function (context, text, x, y, maxWidth, lineHeight) {
     }
 };
 
-printTextObj = function (obj) {
-  // round up - use ceil
-  maxWidth = Math.ceil((background.x-obj.x) * 0.9)
-  // parseInt see
-  // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_parseint1
-  // should work with eg "10px Consolas" to give 10
-  lineHeight= (Math.ceil(parseInt(obj.font))*1.1)
-  ctx = myGameArea.context
-  wrapText(ctx, obj.text, obj.x, obj.y, maxWidth, lineHeight)
-}
-
-function startGame(myAv,yourAv,bg, story) {
+function startGame(myAv,yourAv,bg) {
  
     if ( ! myAv ) myAv = myAvatar
     if ( ! yourAv ) yourAv = yourAvatar
     if ( ! bg ) bg = background
-    if ( ! story ) story = myStorySetup
 
     // game pieces
     myField = new component(bg);
@@ -305,8 +292,6 @@ function startGame(myAv,yourAv,bg, story) {
     myScore = new text_component(myScoreSetup);
     // Lives
     myLife = new text_component(myLifeSetup);
-    // story text
-    myStory = new text_component(story)
 
     myGameArea.start();
 }
@@ -335,6 +320,7 @@ var myGameArea = {
         this.canvas.width = background.x;
         this.canvas.height = background.y;
         this.context = this.canvas.getContext("2d");
+        this.context.textBaseline = 'middle'
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, interval);
@@ -355,13 +341,27 @@ var myGameArea = {
     }
 }
 
-function text_component(obj){
+printTextObj = function (obj) {
+  // round up - use ceil
+  maxWidth = Math.ceil((background.x-obj.x) * 0.5)
+  // parseInt see
+  // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_parseint1
+  // should work with eg "10px Consolas" to give 10
+  lineHeight= (Math.ceil(parseInt(obj.font)*1.1))
+  ctx = myGameArea.context
+  wrapText(ctx, obj.text, obj.x, obj.y, maxWidth, lineHeight)
+}
+
+
+function text_component(obj,active){
     this.obj = obj;
     //this.ctx = myGameArea.context;
+    if ( obj.text ) this.text = obj.text
     this.x = this.obj.x;
     this.y = this.obj.y;
     this.font = this.obj.font;
     this.color=this.obj.color;
+    if (active ) this.active = active
     this.reset = function() {
         this.x = this.obj.x;
         this.y = this.obj.y;
@@ -372,9 +372,18 @@ function text_component(obj){
         ctx = myGameArea.context
         ctx.font = this.font;
         ctx.fillStyle = this.color;
-        //if ( this.text ) ctx.fillText(this.text, this.x, this.y);
-        if ( this.text ) printTextObj(this)
+        if ( this.text ) ctx.fillText(this.text, this.x, this.y);
+        //if ( this.text ) printTextObj(this)
     }
+}
+
+function clear_bullets(obj) {
+    if ( ! obj.myBullets.length ) return;
+
+    for (i = 0; i < obj.myBullets.length; i += 1) {
+        obj.myBullets[i].active = 0
+    }
+    obj.clearArrows()
 }
 
 // component is an object
@@ -488,12 +497,14 @@ function component(obj) {
     // what happens when you win
     this.win = function() {
         // clear the deck
-        level_up=0
-        updateGameArea()
+        level_up=0;
+        clear_bullets(this)
+        clear_bullets(yourGamePiece)
+        //updateGameArea()
         myScore.text="SCORE: " + Math.floor(myGameArea.score);
         myScore.update();
         if ( level == maxlevels ) {
-            myGame.text="YOU WIN" + hobbit
+            myGame.text="YOU WIN" 
             myGame2.text=""
             this.iwon=1;
             gameover=1
@@ -509,21 +520,30 @@ function component(obj) {
         }
         myGame.update();
         //updateGameArea()
-        for (i = 0; i < this.myBullets.length; i += 1) {
-            this.myBullets[i].active = 0
-        }
         if (level_up==1){
             updateGameArea()
         }
     }
     this.cheat = function(isPiece) {
+        // move to the right
         var rockbottom = myGameArea.canvas.width - this.width - buffer;
         this.x = rockbottom;
-        this.win()
+        this.newPos(true)
+        this.update()
+        //this.win()
+    }
+    this.die = function() {
+        // jump on a bullet
+        const yourPiece = yourGamePiece;
+        if ( yourPiece.myBullets.length ){
+            yourPiece.myBullets[0].active = 1;
+            this.x = yourPiece.myBullets[0].x;
+            this.y = yourPiece.myBullets[0].y;
+        }
     }
     this.hitLeft = function(isPiece) {
         var rockbottom = myGameArea.canvas.width - this.width - buffer;
-        if (this.x > rockbottom) {
+        if (this.x >= rockbottom) {
             if ( isPiece ) {
                 this.x = rockbottom;
                 this.win()
@@ -655,6 +675,18 @@ function component(obj) {
     }
 }
 
+function loveHearts(myPiece) {
+    const nBroken = maxlives - myPiece.lives
+    const nLive = myPiece.lives
+    myLife.text=""
+    if (nBroken > 0) myLife.text += "💔".repeat(nBroken)
+    if (nLive > 0) myLife.text += "💚".repeat(nLive)
+    // add on the level indicator
+    myLife.text += " " +  (level).toString()
+    myLife.update();
+    return
+}
+
 function amIHit(myPiece,yourPiece) {
     // have you shot me with your arrows?
     
@@ -664,36 +696,19 @@ function amIHit(myPiece,yourPiece) {
             myPiece.lives = myPiece.lives - 1;
             myGame.text="YOU'RE HIT"
             myGame2.text=""
-            myLife.text="❤️".repeat(myPiece.lives) + " " +  (level).toString()
-            myLife.update();
+            loveHearts(myPiece)
             yourPiece.myBullets[i].active = 0
             if ( myPiece.lives < 1 ) {
                 // what happens if you lose
                 for (i = 0; i < myPiece.myBullets.length; i += 1) {
                     myPiece.myBullets[i].active = 0
                 }
-                // in case you want to do different
-                if ( level == maxlevels && last_chance == 1) {
-                    // down a level if you are at max
-                    // instead of dying 
-                    last_chance = 0
-                    myGame.text="LAST CHANCE: DOWN A LEVEL"
-                    level -= 1
-                    if ( level < 1 ) level = 1
-                    myGame2.text=""
-                    pause_game=1
-                    wait=pause_count
-                    level_up=1
-                    myGame.update();
-                    // need to pause here
-                    reset_poor()
-                } else {
-                    myGame.text="GAME OVER"
-                    myGame2.text=""
-                    gameover = 1;
-                    myPiece.iwon=0;
-                    yourPiece.iwon=1;
-                }
+                // game over
+                myGame.text="GAME OVER"
+                myGame2.text=""
+                gameover = 1;
+                myPiece.iwon=0;
+                yourPiece.iwon=1;
                 myGame.update();
                 return true
             }
@@ -724,8 +739,7 @@ function amIHit(myPiece,yourPiece) {
           myGame.text="YOU'RE HIT"
           myGame2.text=""
           myPiece.lives = myPiece.lives - 1;
-          myLife.text="❤️".repeat(myPiece.lives) + " " +  (level).toString()
-          myLife.update();
+          loveHearts(myPiece)
           myPiece.removeCastle(yourPiece.myCastles[j])
           if ( myPiece.lives < 1 ) {
                 // what happens if you lose
@@ -763,6 +777,10 @@ function pause(txt,txt2) {
   pause_game = 1 - pause_game
 }
 
+//
+// this is run every time step
+// it is the main finction that controls all of the action
+//
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
 
@@ -872,9 +890,7 @@ function updateGameArea() {
     // advance the score and update
     myScore.text="SCORE: " + Math.floor(myGameArea.score);
     myScore.update();
-
-    myLife.text="❤️".repeat(myGamePiece.lives) + " " +  (level).toString()
-    myLife.update();
+    loveHearts(myGamePiece)
 
     // move on the piece and update
     myGamePiece.newPos(true);
@@ -956,7 +972,6 @@ function reset_level1(){
     myAvatarFrame=myAvatar
     yourAvatarFrame=yourAvatar
     backgroundFrame=background
-    storyFrame=myStorySetup;
 
     myGamePiece.reset()
     //myGameArea.frameNo = 1;
@@ -980,7 +995,7 @@ function reset_level1(){
 
     clearInterval(myGameArea.interval)
     delete myGameArea
-    startGame(myAvatarFrame,yourAvatarFrame,backgroundFrame,storyFrame)
+    startGame(myAvatarFrame,yourAvatarFrame,backgroundFrame)
 }
 
 function reset_level2(){
@@ -988,7 +1003,6 @@ function reset_level2(){
     myAvatarFrame=myAvatar2
     yourAvatarFrame=yourAvatar2
     backgroundFrame=background2
-    storyFrame=myStorySetup;
 
     myGamePiece.reset()
     //myGameArea.frameNo = 1;
@@ -1012,25 +1026,29 @@ function reset_level2(){
 
     clearInterval(myGameArea.interval)
     delete myGameArea
-    startGame(myAvatarFrame,yourAvatarFrame,backgroundFrame,storyFrame)
+    startGame(myAvatarFrame,yourAvatarFrame,backgroundFrame)
 }
 
 function reset_poor(){
     // try again, but lose your score
     //level_up = 1
-    sleep(2)
+    //sleep(2)
     myGameArea.score = myGameArea.score/2
     if ( level == 1 ) reset_level1();
     if ( level == 2 ) reset_level2();
 }
 
 function help(){
-    var x=1;
+    window.open("help.html")
+}
+
+function bg(){
+    window.open("background.html")
 }
 
 function reset(){
     // wait
-    sleep(2)
+    //sleep(2)
     if ( level == 1 ) reset_level1();
     if ( level == 2 ) reset_level2();
 }
@@ -1047,14 +1065,13 @@ function reset(){
 <button type="button" onmouseover="myGamePiece.fire()" onmousedown="myGamePiece.fire()" onmouseup="myGamePiece.fire()" ontouchstart="myGamePiece.fire()">FIRE</button>
 <br>
 <br>
-<button type="button onmouseover="myGamePiece.stop()">STOP</button>
-<button type="button onmousedown="reset_poor()">Try Again</button>
+<button type="button onmousedown="bg()" onmouseover="bg()">Background</button>
 <button type="button onmousedown="help()" onmouseover="help()">Help</button>
 <p>Meet the Tudors: Make it to the right of the screen to win</p>
 <br>
 <button onmousedown="pause('PAUSED')" onmouseover="pause('PAUSED')">pause</button>
-
 <button onmousedown="myGamePiece.cheat()">cheat</button>
+<button onmousedown="myGamePiece.die()">die</button>
 <br>
 <audio id="myAudio" controls>
   <source src="greensleeves-flute-and-guitar.mp3" type="audio/mpeg">
