@@ -4,8 +4,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
 <style>
 canvas {
+    width: 1024px;
+    height:633px;
     border:1px solid #d3d3d3;
     background-color: #f1f1f1;
+    display: block;
 }
 </style>
 </head>
@@ -39,8 +42,8 @@ var speedscale = 600
 
 var background = {
   file : "background.gif",
-  x    : Math.floor(6144/6),
-  y    : Math.floor(3072/6),
+  x    : 1024,
+  y    : 633,
   startx : 0,
   starty : 0,
   type : "image",
@@ -78,7 +81,7 @@ var yourAvatar = {
   startx : background.x - myAvatar.x - 10,
   starty : 0,
   shot : { 
-    file : "cannon.gif",
+    file : "back_arrow.gif",
     x : 10,
     y : 10,
     direction : -1
@@ -96,7 +99,7 @@ var yourAvatar = {
 
 var myScoreSetup = {
   font:  "30px Consolas", 
-  color : "black", 
+  color : "green", 
   x     :  280, 
   y     :  40,
   text  : ""
