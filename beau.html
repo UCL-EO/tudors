@@ -17,7 +17,8 @@ canvas {
 
 <script>
 
-
+var level = 1
+var maxlevels = 2;
 var gameover = 0;
 // max hits for castles
 var maxhits = 6;
@@ -39,6 +40,7 @@ var maxArrows = 3;
 var maxEnemyArrows = 50;
 var test=0;
 var speedscale = 600
+var pause_game = 0
 
 var background = {
   file : "background.gif",
@@ -98,10 +100,10 @@ var yourAvatar = {
 
 
 var myScoreSetup = {
-  font:  "30px Consolas", 
+  font:  "25px Consolas", 
   color : "green", 
-  x     :  280, 
-  y     :  40,
+  x     :  230, 
+  y     :  80,
   text  : ""
 }
 
@@ -110,17 +112,26 @@ var myGameSetup = {
   font:  "100px Consolas",  
   color : "red", 
   x     :  background.x/4,
-  y     :  background.y/4,
+  y     :  background.y/2,
+  text  : ""
+}
+
+// text for game over etc
+var myGameSetup2 = {
+  font:  "50px Consolas",
+  color : "red",
+  x     :  background.x/4,
+  y     :  background.y/2+background.y/20,
   text  : ""
 }
 
 // life indicator
 var myLifeSetup = {
-  font:  "30px Consolas",
+  font:  "25px Consolas",
   color : "black",
-  x     :  280,
-  y     :  80,
-  text  : "❤️".repeat(maxlives)
+  x     :  230,
+  y     :  120,
+  text  : "❤️".repeat(maxlives) + " " +  (level).toString()
 }
 
 // story text
@@ -155,6 +166,7 @@ function startGame() {
     yourGamePiece = new component(yourAvatar);
     // game over msgs
     myGame = new text_component(myGameSetup);
+    myGame2 = new text_component(myGameSetup2);
     // score
     myScore = new text_component(myScoreSetup);
     // Lives
@@ -225,7 +237,7 @@ function text_component(obj){
         ctx = myGameArea.context
         ctx.font = this.font;
         ctx.fillStyle = this.color;
-        ctx.fillText(this.text, this.x, this.y);
+        if ( this.text ) ctx.fillText(this.text, this.x, this.y);
     }
 }
 
@@ -339,15 +351,29 @@ function component(obj) {
     }
     // what happens when you win
     this.win = function() {
-        gameover=1
         myScore.text="SCORE: " + myGameArea.score;
         myScore.update();
-        myGame.text="YOU WIN" 
+        if ( level == maxlevels ) {
+            myGame.text="YOU WIN"
+            myGame2.text=""
+            this.iwon=1;
+            gameover=1
+        } else {
+            myGame.text="NEXT LEVEL"
+            myGame2.text="PAUSED"
+            pause_game=1
+            level += 1
+            reset()
+        }
         myGame.update();
-        this.iwon=1;
         for (i = 0; i < this.myBullets.length; i += 1) {
             this.myBullets[i].active = 0
         }
+    }
+    this.cheat = function(isPiece) {
+        var rockbottom = myGameArea.canvas.width - this.width - buffer;
+        this.x = rockbottom;
+        this.win()
     }
     this.hitLeft = function(isPiece) {
         var rockbottom = myGameArea.canvas.width - this.width - buffer;
@@ -446,6 +472,7 @@ function component(obj) {
                     that.removeBullet(that.myBullets[j])
                     myGameArea.score += 10
                     myGame.text="GREAT SHOT"
+                    myGame2.text=""
                     myGame.update();
                 }
             }
@@ -457,6 +484,7 @@ function component(obj) {
                     this.remove(this.myBullets[i],that.myCastles[j])
                     myGameArea.score += 1
                     myGame.text="DAMAGE"
+                    myGame2.text=""
                     myGame.update();
                 }
             }
@@ -489,18 +517,30 @@ function amIHit(myPiece,yourPiece) {
         if (myPiece.crashWith(yourPiece.myBullets[i],0)) {
             myPiece.lives = myPiece.lives - 1;
             myGame.text="YOU'RE HIT"
-            myLife.text="❤️".repeat(myPiece.lives)
+            myGame2.text=""
+            myLife.text="❤️".repeat(myPiece.lives) + " " +  (level).toString()
             myLife.update();
             yourPiece.myBullets[i].active = 0
             if ( myPiece.lives < 1 ) {
                 // what happens if you lose
-                gameover = 1;
-                myPiece.iwon=0;
-                yourPiece.iwon=1;
                 for (i = 0; i < myPiece.myBullets.length; i += 1) {
                     myPiece.myBullets[i].active = 0
                 }
-                myGame.text="GAME OVER"
+                // in case you want to do different
+                if ( level == maxlevels ) {
+                    myGame.text="DOWN A LEVEL"
+                    level -= 1
+                    if ( level < 1 ) level = 1
+                    myGame2.text="PAUSED"
+                    pause_game=1
+                    reset()
+                } else {
+                    myGame.text="GAME OVER"
+                    myGame2.text=""
+                    gameover = 1;
+                    myPiece.iwon=0;
+                    yourPiece.iwon=1;
+                }
                 myGame.update();
                 return true
             }
@@ -529,19 +569,30 @@ function amIHit(myPiece,yourPiece) {
           myPiece.stop()
           myPiece.left(1)
           myGame.text="YOU'RE HIT"
+          myGame2.text=""
           myPiece.lives = myPiece.lives - 1;
-          myLife.text="❤️".repeat(myPiece.lives)
+          myLife.text="❤️".repeat(myPiece.lives) + " " +  (level).toString()
           myLife.update();
           myPiece.removeCastle(yourPiece.myCastles[j])
           if ( myPiece.lives < 1 ) {
                 // what happens if you lose
-                gameover = 1;
-                myPiece.iwon=0;
-                yourPiece.iwon=1;
+                if ( level == maxlevels ) {
+                    myGame.text="DOWN A LEVEL"
+                    level -= 1
+                    if ( level < 1 ) level = 1
+                    myGame2.text="PAUSED"
+                    pause_game=1
+                    reset()
+                } else {
+                    myGame.text="GAME OVER"
+                    myGame2.text=""
+                    gameover = 1;
+                    myPiece.iwon=0;
+                    yourPiece.iwon=1;
+                }
                 for (i = 0; i < myPiece.myBullets.length; i += 1) {
                     myPiece.myBullets[i].active = 0
                 }
-                myGame.text="GAME OVER"
                 myGame.update();
                 return true
           }
@@ -551,8 +602,22 @@ function amIHit(myPiece,yourPiece) {
     return false;
 }
 
+function pause() {
+  pause_game = 1 - pause_game
+}
+
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+
+    if ( pause_game == 1) {
+        myGame.text=""
+        myGame2.text=""
+        myGame.update();
+        myGame.text="PAUSED"
+        myGame2.text=""
+        myGame.update();
+        return;
+    }
 
     if ( gameover == 1 ) return;
 
@@ -571,6 +636,7 @@ function updateGameArea() {
     // fire my arrows from alien
     if (myGameArea.frameNo == 1 || everyinterval(Math.floor(Math.random()*600))) {
         myGame.text=""
+        myGame2.text=""
         yourGamePiece.clearArrows()
         if ( yourGamePiece.myBullets.length <= maxEnemyArrows ) {
             // fire from your leader
@@ -587,6 +653,7 @@ function updateGameArea() {
     for (i = 0; i < yourGamePiece.myCastles.length; i += 1) {
         if (everyinterval(Math.floor(Math.random()*5000))) {
             myGame.text=""
+            myGame2.text=""
             yourGamePiece.clearArrows()
             x = yourGamePiece.myCastles[i].x
             y = yourGamePiece.myCastles[i].y
@@ -622,8 +689,8 @@ function updateGameArea() {
             myGamePiece.removeBullet(myGamePiece.myBullets[i])
             myGameArea.score += 100
             myGame.text="BONUS 100"
+            myGame2.text=""
             myGame.update();
-            //myGame.text=""
         }
     }
 
@@ -631,7 +698,7 @@ function updateGameArea() {
     myScore.text="SCORE: " + myGameArea.score;
     myScore.update();
 
-    myLife.text="❤️".repeat(myGamePiece.lives)
+    myLife.text="❤️".repeat(myGamePiece.lives) + " " +  (level).toString()
     myLife.update();
 
     // move on the piece and update
@@ -654,13 +721,22 @@ function updateGameArea() {
     // test for lose
     for (i = 0; i < yourGamePiece.myCastles.length; i += 1) {
         if ( yourGamePiece.myCastles[i].x < -10 ) {
-            gameover = 1;
-            myGamePiece.iwon=0;
-            yourGamePiece.iwon=1;
+            if ( level == maxlevels ) {
+                myGame.text="DOWN A LEVEL"
+                level -= 1
+                if ( level < 1 ) level = 1
+                myGame2.text="PAUSED"
+                pause()
+                reset()
+            } else {
+                myGame.text="GAME OVER"
+                gameover = 1;
+                myPiece.iwon=0;
+                yourPiece.iwon=1;
+            }
             for (i = 0; i < myGamePiece.myBullets.length; i += 1) {
                 myGamePiece.myBullets[i].active = 0
             }
-            myGame.text="GAME OVER"
             myGame.update();
             return true
         }
@@ -701,7 +777,7 @@ function maxy(n) {
 }
 
 
-function reset(){
+function reset_level1(){
     myGamePiece.reset()
     //myGameArea.frameNo = 1;
     gameover=0;
@@ -727,6 +803,43 @@ function reset(){
     startGame()
 }
 
+function reset_level2(){
+    myGamePiece.reset()
+    //myGameArea.frameNo = 1;
+    gameover=0;
+    //myGameArea.score = 0;
+
+    // game pieces
+    delete myField;
+    // my character
+    delete myGamePiece;
+    // your character
+    delete yourGamePiece;
+    // game over msgs
+    delete myGame;
+    // score
+    delete myScore;
+    // Lives
+    delete myLife;
+
+    //myGameArea.start();
+
+    clearInterval(myGameArea.interval)
+    delete myGameArea
+    startGame()
+}
+
+function reset_poor(){
+    // try again, but lose your score
+    myGameArea.score = myGameArea.score/2
+    if ( level == 1 ) reset_level1();
+    if ( level == 2 ) reset_level2();
+}
+
+function reset(){
+    if ( level == 1 ) reset_level1();
+    if ( level == 2 ) reset_level2();
+}
 
 </script>
 <br>
@@ -737,11 +850,17 @@ function reset(){
 <br>
 <button onmousedown="myGamePiece.down(1)" onmouseover="myGamePiece.down(1)" onmouseup="myGamePiece.stopy()" ontouchstart="myGamePiece.down(1)">DOWN</button>
 <br>
-<button onmouseover="myGamePiece.stop()">STOP</button>
-<button onmousedown="reset()">reset</button>
 <button onmouseover="myGamePiece.fire()" onmousedown="myGamePiece.fire()" onmouseup="myGamePiece.fire()" ontouchstart="myGamePiece.fire()">FIRE</button>
-<p>Meet the Tudors: Make it to the right of the screen</p>
+<br>
+<br>
+<button onmouseover="myGamePiece.stop()">STOP</button>
+<button onmousedown="reset_poor()">Try Again</button>
+<p>Meet the Tudors: Make it to the right of the screen to win</p>
+<br>
+<button onmousedown="pause()" onmouseover="pause()">pause</button>
 
+<button onmousedown="myGamePiece.cheat()">cheat</button>
+<br>
 <audio id="myAudio" controls>
   <source src="greensleeves-flute-and-guitar.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
