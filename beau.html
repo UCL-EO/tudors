@@ -16,7 +16,10 @@ canvas {
 <body onload="startGame()">
 
 <script>
+// for testing
+const hobbit = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit­hole, and that means comfort.  It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube­shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats ­ the hobbit was fond of visitors. The tunnel wound on and on, going fairly but not quite straight into the side of the hill ­ The Hill, as all the people for many miles round called it ­ and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining­rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left­hand side (going in), for these were the only ones to have windows, deep­set round windows looking over his garden and meadows beyond, sloping down to the river."
 
+var level_up = 0
 var level = 1
 var maxlevels = 2;
 var gameover = 0;
@@ -52,6 +55,16 @@ var background = {
   direction : 0
 };
 
+var background2 = {
+  file : "background.gif",
+  x    : 1024,
+  y    : 633,
+  startx : 0,
+  starty : 0,
+  type : "image",
+  direction : 0
+};
+
 
 var myAvatar = {
   file : "henry.gif",
@@ -68,6 +81,30 @@ var myAvatar = {
   castle : {
     // root name for castle
     file : "castle",
+    x    : 77,
+    y    : 77,
+    direction : 0
+  },
+  type : "image",
+  direction : 1
+};
+
+// level 2
+var myAvatar2 = {
+  file : "henry.gif",
+  x    : 70,
+  y    : 70,
+  startx : 10,
+  starty : 120,
+  shot : {
+    file : "arrow.gif",
+    x : 50,
+    y : 10,
+    direction : 1,
+  },
+  castle : {
+    // root name for castle
+    file : "englishship",
     x    : 77,
     y    : 77,
     direction : 0
@@ -98,6 +135,31 @@ var yourAvatar = {
   direction : 1
 };
 
+var yourAvatar2 = {
+  file : "englishship_1.gif",
+  x    : 70,
+  y    : 70,
+  startx : background.x - myAvatar2.x - 10,
+  starty : 0,
+  shot : {
+    file : "cannon.gif",
+    x : 10,
+    y : 10,
+    direction : -1
+  },
+  castle : {
+    file : "englishship",
+    x    : 100,
+    y    : 100,
+    direction : -1
+  },
+  type : "image",
+  direction : 1
+};
+
+var myAvatarFrame=myAvatar
+var yourAvatarFrame=yourAvatar
+var backgroundFrame=background
 
 var myScoreSetup = {
   font:  "25px Consolas", 
@@ -156,12 +218,65 @@ function translate_origin (obj,startx,starty) {
   return new_obj
 }
 
-function startGame() {
+
+// from https://stackoverflow.com/questions/5026961/html5-canvas-ctx-filltext-wont-do-line-breaks
+var wrapText = function (context, text, x, y, maxWidth, lineHeight) {
+    var paragraphs = text.split("\n");
+    var textLines = [];
+
+    // Loop through paragraphs
+    for (var p = 0; p < paragraphs.length; p++) {
+        var line = "";
+        var words = paragraphs[p].split(" ");
+        // Loop through words
+        for (var w = 0; w < words.length; w++) {
+            var testLine = line + words[w] + " ";
+            var metrics = context.measureText(testLine);
+            var testWidth = metrics.width;
+            // Make a line break if line is too long
+            if (testWidth > maxWidth) {
+                textLines.push(line.trim());
+                line = words[w] + " ";
+            }
+            else {
+                line = testLine;
+            }
+        }
+        textLines.push(line.trim());
+    }
+
+    // Move text up if centered vertically
+    if (context.textBaseline === 'middle')
+        y = y - ((textLines.length-1) * lineHeight) / 2;
+
+    // Render text on canvas
+    for (var tl = 0; tl < textLines.length; tl++) {
+        context.fillText(textLines[tl], x, y);
+        y += lineHeight;
+    }
+};
+
+printTextObj = function (obj) {
+  // round up - use ceil
+  maxWidth = Math.ceil(background.x * 0.9)
+  // parseInt see
+  // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_parseint1
+  // should work with eg "10px Consolas" to give 10
+  lineHeight= Math.ceil(parseInt(obj.font)*1.1)
+  ctx = myGameArea.context
+  wrapText(ctx, obj.text, obj.x, obj.y, maxWidth, lineHeight)
+}
+
+function startGame(myAv,yourAv,bg) {
+ 
+    if ( ! myAv ) myAv = myAvatar
+    if ( ! yourAv ) yourAv = yourAvatar
+    if ( ! bg ) bg = background
 
     // game pieces
-    myField = new component(background);
+    myField = new component(bg);
     // my character
-    myGamePiece = new component(myAvatar);
+    myGamePiece = new component(myAv);
     // your character
     yourGamePiece = new component(yourAvatar);
     // game over msgs
@@ -203,10 +318,10 @@ var myGameArea = {
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, interval);
         nCastles = Math.floor(Math.random()*6)+2
-        addLineOfCastles(myGamePiece,nCastles,Math.floor(background.x*0.1),myAvatar.castle.x,myAvatar.castle.y,myAvatar.castle.file)
+        addLineOfCastles(myGamePiece,nCastles,Math.floor(backgroundFrame.x*0.1),myAvatarFrame.castle.x,myAvatarFrame.castle.y,myAvatarFrame.castle.file)
 
         nCastles = 10
-        addLineOfCastles(yourGamePiece,nCastles,Math.floor(background.x*0.9-yourAvatar.castle.x/4),yourAvatar.castle.x,yourAvatar.castle.y,yourAvatar.castle.file)
+        addLineOfCastles(yourGamePiece,nCastles,Math.floor(backgroundFrame.x*0.9-yourAvatarFrame.castle.x/4),yourAvatarFrame.castle.x,yourAvatarFrame.castle.y,yourAvatarFrame.castle.file)
 
         },
     clear : function() {
@@ -233,11 +348,11 @@ function text_component(obj){
         this.color=this.obj.color;
     }
     this.update = function() {
-        //this.font = this.font || "30px Consolas"
         ctx = myGameArea.context
         ctx.font = this.font;
         ctx.fillStyle = this.color;
-        if ( this.text ) ctx.fillText(this.text, this.x, this.y);
+        //if ( this.text ) ctx.fillText(this.text, this.x, this.y);
+        if ( this.text ) printTextObj(this)
     }
 }
 
@@ -351,23 +466,31 @@ function component(obj) {
     }
     // what happens when you win
     this.win = function() {
+        // clear the deck
+        level_up=0
+        //myGameArea.clear()
         myScore.text="SCORE: " + myGameArea.score;
         myScore.update();
         if ( level == maxlevels ) {
-            myGame.text="YOU WIN"
+            myGame.text="YOU WIN" + hobbit
             myGame2.text=""
             this.iwon=1;
             gameover=1
         } else {
-            myGame.text="NEXT LEVEL"
+            myGame.text="LEVEL UP"
             myGame2.text="PAUSED"
             pause_game=1
             level += 1
-            reset()
+            level_up=1
+            // next level
         }
         myGame.update();
+        //updateGameArea()
         for (i = 0; i < this.myBullets.length; i += 1) {
             this.myBullets[i].active = 0
+        }
+        if (level_up==1){
+            updateGameArea()
         }
     }
     this.cheat = function(isPiece) {
@@ -414,7 +537,7 @@ function component(obj) {
     this.fire = function() {
         this.clearArrows()
         if ( this.myBullets.length < maxArrows ) {
-            this.myBullets.push(new component(translate_origin(myAvatar.shot,this.x,this.y+Math.random()*70)));
+            this.myBullets.push(new component(translate_origin(myAvatarFrame.shot,this.x,this.y+Math.random()*70)));
             this.myBullets[this.myBullets.length-1].active=maxhits;
         }
     }
@@ -533,7 +656,8 @@ function amIHit(myPiece,yourPiece) {
                     if ( level < 1 ) level = 1
                     myGame2.text="PAUSED"
                     pause_game=1
-                    reset()
+                    level_up=1
+                    //reset()
                 } else {
                     myGame.text="GAME OVER"
                     myGame2.text=""
@@ -602,29 +726,34 @@ function amIHit(myPiece,yourPiece) {
     return false;
 }
 
-function pause() {
+function pause(txt,txt2) {
+  if ( txt ) myGame.text=txt
+  if ( txt2 ) myGame2.txt=txt2
   pause_game = 1 - pause_game
 }
 
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
 
-    if ( pause_game == 1) {
-        myGame.text=""
-        myGame2.text=""
-        myGame.update();
-        myGame.text="PAUSED"
-        myGame2.text=""
-        myGame.update();
-        return;
-    }
-
     if ( gameover == 1 ) return;
 
+    if ( pause_game == 1) {
+        //myGameArea.clear()
+        //myGame.text=""
+        //myGame2.text=""
+        myGame.update();
+        //myGame.text="PAUSED"
+        //myGame2.text=""
+        //myGame.update();
+        return;
+    }
+    // action on level up
+    if (level_up == 1 ) {
+        level_up = 0
+        reset()
+    }
+
     // check if your arrows collide with myGamePiece
-    //if ( amIHit(myGamePiece,yourGamePiece) ) {
-    //    return true
-    //}
     amIHit(myGamePiece,yourGamePiece)
 
     myGameArea.clear();
@@ -640,7 +769,7 @@ function updateGameArea() {
         yourGamePiece.clearArrows()
         if ( yourGamePiece.myBullets.length <= maxEnemyArrows ) {
             // fire from your leader
-            yourGamePiece.myBullets.push(new component(translate_origin(yourAvatar.shot,yourGamePiece.x,yourGamePiece.y+Math.random()*10)));
+            yourGamePiece.myBullets.push(new component(translate_origin(yourAvatarFrame.shot,yourGamePiece.x,yourGamePiece.y+Math.random()*10)));
             yourGamePiece.myBullets[yourGamePiece.myBullets.length-1].active=1;
         }
 
@@ -659,7 +788,7 @@ function updateGameArea() {
             y = yourGamePiece.myCastles[i].y
             if ( yourGamePiece.myBullets.length <= maxEnemyArrows ) {
                 // fire from the castles
-                yourGamePiece.myBullets.push(new component(translate_origin(yourAvatar.shot,x,y+Math.random()*10)));
+                yourGamePiece.myBullets.push(new component(translate_origin(yourAvatarFrame.shot,x,y+Math.random()*10)));
                 yourGamePiece.myBullets[yourGamePiece.myBullets.length-1].active=1;
             }
         }
@@ -726,7 +855,7 @@ function updateGameArea() {
                 level -= 1
                 if ( level < 1 ) level = 1
                 myGame2.text="PAUSED"
-                pause()
+                //updateGameArea()
                 reset()
             } else {
                 myGame.text="GAME OVER"
@@ -778,6 +907,10 @@ function maxy(n) {
 
 
 function reset_level1(){
+    myAvatarFrame=myAvatar2
+    yourAvatarFrame=yourAvatar2
+    backgroundFrame=background2
+
     myGamePiece.reset()
     //myGameArea.frameNo = 1;
     gameover=0;
@@ -800,10 +933,15 @@ function reset_level1(){
 
     clearInterval(myGameArea.interval)
     delete myGameArea
-    startGame()
+    startGame(myAvatarFrame,yourAvatarFrame,backgroundFrame)
 }
 
 function reset_level2(){
+
+    myAvatarFrame=myAvatar2
+    yourAvatarFrame=yourAvatar2
+    backgroundFrame=background2
+
     myGamePiece.reset()
     //myGameArea.frameNo = 1;
     gameover=0;
@@ -826,7 +964,7 @@ function reset_level2(){
 
     clearInterval(myGameArea.interval)
     delete myGameArea
-    startGame()
+    startGame(myAvatarFrame,yourAvatarFrame,backgroundFrame)
 }
 
 function reset_poor(){
@@ -857,7 +995,7 @@ function reset(){
 <button onmousedown="reset_poor()">Try Again</button>
 <p>Meet the Tudors: Make it to the right of the screen to win</p>
 <br>
-<button onmousedown="pause()" onmouseover="pause()">pause</button>
+<button onmousedown="pause('PAUSED')" onmouseover="pause('PAUSED')">pause</button>
 
 <button onmousedown="myGamePiece.cheat()">cheat</button>
 <br>
