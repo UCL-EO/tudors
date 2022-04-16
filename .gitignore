@@ -1,7 +1,9 @@
 *.swp
 build/*
 docs/build/*
-docs/source/*.gif
-docs/source/*.md
+docs/*.gif
+docs/*.md
 .DS_Store
 */.DS_Store
+*/_*
+
