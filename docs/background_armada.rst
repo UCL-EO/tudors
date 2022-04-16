@@ -14,190 +14,70 @@ victory.
 Characters in the game level
 ----------------------------
 
-+----------------+------------------------------+-------------+-------+
-| Name           | Game Avatar                  | Original    | Notes |
-+================+==============================+=============+=======+
-| Francis Drake  | |Francis Drake|              | |image1|    | He    |
-|                |                              |             | was   |
-|                |                              |             | the   |
-|                |                              |             | comm  |
-|                |                              |             | ander |
-|                |                              |             | of    |
-|                |                              |             | the   |
-|                |                              |             | en    |
-|                |                              |             | glish |
-|                |                              |             | under |
-|                |                              |             | the   |
-|                |                              |             | rule  |
-|                |                              |             | of    |
-|                |                              |             | queen |
-|                |                              |             | Eliz  |
-|                |                              |             | abeth |
-|                |                              |             | the   |
-|                |                              |             | f     |
-|                |                              |             | irst, |
-|                |                              |             | who   |
-|                |                              |             | was   |
-|                |                              |             | one   |
-|                |                              |             | of    |
-|                |                              |             | king  |
-|                |                              |             | He    |
-|                |                              |             | nry’s |
-|                |                              |             | daugh |
-|                |                              |             | ters. |
-+----------------+------------------------------+-------------+-------+
-| Philip II of   | |Philip II|                  | |Philip II  | P     |
-| Spain          |                              | of Spain|   | hilip |
-|                |                              |             | II    |
-|                |                              |             | was   |
-|                |                              |             | the   |
-|                |                              |             | King  |
-|                |                              |             | of    |
-|                |                              |             | S     |
-|                |                              |             | pain. |
-|                |                              |             | He    |
-|                |                              |             | sent  |
-|                |                              |             | his   |
-|                |                              |             | adm   |
-|                |                              |             | irals |
-|                |                              |             | and   |
-|                |                              |             | sol   |
-|                |                              |             | diers |
-|                |                              |             | to    |
-|                |                              |             | i     |
-|                |                              |             | nvade |
-|                |                              |             | En    |
-|                |                              |             | gland |
-|                |                              |             | in    |
-|                |                              |             | the   |
-|                |                              |             | Ar    |
-|                |                              |             | mada, |
-|                |                              |             | thus  |
-|                |                              |             | spa   |
-|                |                              |             | rking |
-|                |                              |             | the   |
-|                |                              |             | ba    |
-|                |                              |             | ttle. |
-+----------------+------------------------------+-------------+-------+
-| English ship   | |image2|                     |             | the   |
-|                |                              |             | en    |
-|                |                              |             | glish |
-|                |                              |             | had   |
-|                |                              |             | 34    |
-|                |                              |             | armed |
-|                |                              |             | wars  |
-|                |                              |             | hips, |
-|                |                              |             | l     |
-|                |                              |             | oaded |
-|                |                              |             | with  |
-|                |                              |             | sol   |
-|                |                              |             | diers |
-|                |                              |             | and   |
-|                |                              |             | can   |
-|                |                              |             | nons. |
-+----------------+------------------------------+-------------+-------+
-| Spanish ship   | |image3|                     |             | this  |
-|                |                              |             | inc   |
-|                |                              |             | ludes |
-|                |                              |             | the   |
-|                |                              |             | flag  |
-|                |                              |             | of    |
-|                |                              |             | the   |
-|                |                              |             | sp    |
-|                |                              |             | anish |
-|                |                              |             | em    |
-|                |                              |             | pire, |
-|                |                              |             | not   |
-|                |                              |             | the   |
-|                |                              |             | one   |
-|                |                              |             | we    |
-|                |                              |             | see   |
-|                |                              |             | t     |
-|                |                              |             | oday. |
-+----------------+------------------------------+-------------+-------+
-| Bowls ball     | |Bowls ball avatar|          | |Sir        | Fr    |
-|                |                              | Francis     | ancis |
-|                |                              | Drake,      | Drake |
-|                |                              | picture,    | fam   |
-|                |                              | image,      | ously |
-|                |                              | il          | p     |
-|                |                              | lustration| | layed |
-|                |                              | Sir Francis | a     |
-|                |                              | Drake       | game  |
-|                |                              | finishes    | of    |
-|                |                              | his game of | bowls |
-|                |                              | bowls on    | as    |
-|                |                              | Plymouth    | the   |
-|                |                              | Hoe as the  | Sp    |
-|                |                              | Spanish     | anish |
-|                |                              | Armada is   | a     |
-|                |                              | sighted, by | rmada |
-|                |                              | `Peter      | s     |
-|                |                              | J           | ailed |
-|                |                              | ackson <htt | into  |
-|                |                              | ps://www.lo | En    |
-|                |                              | okandlearn. | gland |
-|                |                              | com/history | and   |
-|                |                              | -images/sea | would |
-|                |                              | rch.php?sea | not   |
-|                |                              | rch=Peter+J | fight |
-|                |                              | ackson&bool | until |
-|                |                              | =phrase>`__ | he    |
-|                |                              |             | fini  |
-|                |                              |             | shed. |
-+----------------+------------------------------+-------------+-------+
-| Cannon shot    | |cannon shot|                | |Shot|      | The   |
-|                |                              |             | Tudor |
-|                |                              |             | p     |
-|                |                              |             | eriod |
-|                |                              |             | intro |
-|                |                              |             | duced |
-|                |                              |             | can   |
-|                |                              |             | nons, |
-|                |                              |             | which |
-|                |                              |             | shot  |
-|                |                              |             | these |
-|                |                              |             | c     |
-|                |                              |             | annon |
-|                |                              |             | balls |
-|                |                              |             | off   |
-|                |                              |             | of    |
-|                |                              |             | the   |
-|                |                              |             | side  |
-|                |                              |             | of    |
-|                |                              |             | s     |
-|                |                              |             | hips. |
-+----------------+------------------------------+-------------+-------+
-| Background     | |Armada map|                 | |The Battle | This  |
-|                |                              | of          | map   |
-|                |                              | Gravelines, | is    |
-|                |                              | Mon 8th     | from  |
-|                |                              | August|     | the   |
-|                |                              |             | B     |
-|                |                              |             | attle |
-|                |                              |             | of    |
-|                |                              |             | G     |
-|                |                              |             | ravel |
-|                |                              |             | ines, |
-|                |                              |             | Mon   |
-|                |                              |             | 8th   |
-|                |                              |             | A     |
-|                |                              |             | ugust |
-|                |                              |             | from  |
-|                |                              |             | `     |
-|                |                              |             | NMRN  |
-|                |                              |             | <http |
-|                |                              |             | s://w |
-|                |                              |             | ww.nm |
-|                |                              |             | rn.or |
-|                |                              |             | g.uk/ |
-|                |                              |             | major |
-|                |                              |             | -appe |
-|                |                              |             | als/a |
-|                |                              |             | rmada |
-|                |                              |             | -maps |
-|                |                              |             | >`__. |
-+----------------+------------------------------+-------------+-------+
++-----------+---------------+---------------+------------------------+
+| Name      | Game Avatar   | Original      | Notes                  |
++===========+===============+===============+========================+
+| Francis   | |Francis      | |image1|      | He was the commander   |
+| Drake     | Drake|        |               | of the english under   |
+|           |               |               | the rule of queen      |
+|           |               |               | Elizabeth the first,   |
+|           |               |               | who was one of king    |
+|           |               |               | Henry’s daughters.     |
++-----------+---------------+---------------+------------------------+
+| Philip II | |Philip II|   | |Philip II of | Philip II was the King |
+| of Spain  |               | Spain|        | of Spain. He sent his  |
+|           |               |               | admirals and soldiers  |
+|           |               |               | to invade England in   |
+|           |               |               | the Armada, thus       |
+|           |               |               | sparking the battle.   |
++-----------+---------------+---------------+------------------------+
+| English   | |image2|      |               | the english had 34     |
+| ship      |               |               | armed warships, loaded |
+|           |               |               | with soldiers and      |
+|           |               |               | cannons.               |
++-----------+---------------+---------------+------------------------+
+| Spanish   | |image3|      |               | this includes the flag |
+| ship      |               |               | of the spanish empire, |
+|           |               |               | not the one we see     |
+|           |               |               | today.                 |
++-----------+---------------+---------------+------------------------+
+| Bowls     | |Bowls ball   | |Sir Francis  | Francis Drake famously |
+| ball      | avatar|       | Drake,        | played a game of bowls |
+|           |               | picture,      | as the Spanish armada  |
+|           |               | image,        | sailed into England    |
+|           |               | illustration| | and would not fight    |
+|           |               | Sir Francis   | until he finished.     |
+|           |               | Drake         |                        |
+|           |               | finishes his  |                        |
+|           |               | game of bowls |                        |
+|           |               | on Plymouth   |                        |
+|           |               | Hoe as the    |                        |
+|           |               | Spanish       |                        |
+|           |               | Armada is     |                        |
+|           |               | sighted, by   |                        |
+|           |               | `Peter        |                        |
+|           |               | Jackson <     |                        |
+|           |               | https://www.l |                        |
+|           |               | ookandlearn.c |                        |
+|           |               | om/history-im |                        |
+|           |               | ages/search.p |                        |
+|           |               | hp?search=Pet |                        |
+|           |               | er+Jackson&bo |                        |
+|           |               | ol=phrase>`__ |                        |
++-----------+---------------+---------------+------------------------+
+| Cannon    | |cannon shot| | |Shot|        | The Tudor period       |
+| shot      |               |               | introduced cannons,    |
+|           |               |               | which shot these       |
+|           |               |               | cannonballs off of the |
+|           |               |               | side of ships.         |
++-----------+---------------+---------------+------------------------+
+| B         | |Armada map|  | |The Battle   | This map is from the   |
+| ackground |               | of            | Battle of Gravelines,  |
+|           |               | Gravelines,   | Mon 8th August from    |
+|           |               | Mon 8th       | `NMRN <https://ww      |
+|           |               | August|       | w.nmrn.org.uk/major-ap |
+|           |               |               | peals/armada-maps>`__. |
++-----------+---------------+---------------+------------------------+
 
 .. |Francis Drake| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif
    :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif

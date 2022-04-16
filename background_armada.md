@@ -8,7 +8,7 @@ The Spanish Armada was a fleet of 130 ships that were sent to invade England in 
 ## Characters in the game level
 
 | Name          | Game Avatar           | Original  | Notes |
-| ------------- |:---------------------:|:---------:|:----- |
+| ------- |:-------:|:-------:|:------------- |
 | Francis Drake | [![Francis Drake](https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif)](https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif) | [![Francis Drake](https://dynaimage.cdn.cnn.com/cnn/q_auto,w_1199,c_fill,g_auto,h_674,ar_16:9/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F180531122429-02-francis-drake-wart-portrait.jpg)](https://edition.cnn.com/style/article/francis-drake-wart-authentication-intl/index.html) | He was the commander of the english under the rule of queen Elizabeth the first, who was one of king Henry's daughters. |
 |Philip II of Spain| [![Philip II](https://raw.githubusercontent.com/UCL-EO/tudors/master/philip2.gif)](https://raw.githubusercontent.com/UCL-EO/tudors/master/philip2.gif) | ![Philip II of Spain](https://raw.githubusercontent.com/UCL-EO/tudors/master/philip2fullNew.gif)| Philip II was the King of Spain. He sent his admirals and soldiers to invade England in the Armada, thus sparking the battle. |
 | English ship | ![](https://raw.githubusercontent.com/UCL-EO/tudors/master/englishship_1.gif)|| the english had 34 armed warships, loaded with soldiers and cannons.

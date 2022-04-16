@@ -12,160 +12,52 @@ and his army.
 Characters in the game level
 ----------------------------
 
-+----------------+------------------------------+-------------+-------+
-| Name           | Game Avatar                  | Original    | Notes |
-+================+==============================+=============+=======+
-| Henry VIII     | |Beau’s Henry VIII Avatar|   | |Henry      | King  |
-| (Tudor)        |                              | VIII|       | Henry |
-|                |                              |             | led   |
-|                |                              |             | his   |
-|                |                              |             | army  |
-|                |                              |             | into  |
-|                |                              |             | b     |
-|                |                              |             | attle |
-|                |                              |             | and   |
-|                |                              |             | was   |
-|                |                              |             | ma    |
-|                |                              |             | rried |
-|                |                              |             | 6     |
-|                |                              |             | t     |
-|                |                              |             | imes, |
-|                |                              |             | to    |
-|                |                              |             | Cath  |
-|                |                              |             | erine |
-|                |                              |             | Parr  |
-|                |                              |             | Cath  |
-|                |                              |             | erine |
-|                |                              |             | Ho    |
-|                |                              |             | ward, |
-|                |                              |             | Anne  |
-|                |                              |             | of    |
-|                |                              |             | Cl    |
-|                |                              |             | eves, |
-|                |                              |             | Jane  |
-|                |                              |             | Sey   |
-|                |                              |             | mour, |
-|                |                              |             | Anne  |
-|                |                              |             | B     |
-|                |                              |             | oleyn |
-|                |                              |             | and   |
-|                |                              |             | Cath  |
-|                |                              |             | erine |
-|                |                              |             | of    |
-|                |                              |             | Ar    |
-|                |                              |             | agon. |
-+----------------+------------------------------+-------------+-------+
-| Pierre Terrail | |Beau’s Pierre Terrail       | |Pierre     | P     |
-|                | Avatar|                      | Terrail,    | ierre |
-|                |                              | seigneur de | Ter   |
-|                |                              | Bayard|     | rail, |
-|                |                              |             | sei   |
-|                |                              |             | gneur |
-|                |                              |             | de    |
-|                |                              |             | Ba    |
-|                |                              |             | yard, |
-|                |                              |             | one   |
-|                |                              |             | of    |
-|                |                              |             | the   |
-|                |                              |             | F     |
-|                |                              |             | rench |
-|                |                              |             | comma |
-|                |                              |             | nders |
-|                |                              |             | in    |
-|                |                              |             | the   |
-|                |                              |             | b     |
-|                |                              |             | attle |
-+----------------+------------------------------+-------------+-------+
-| English        | |English cavalry avatar|     | |Horse      | Henry |
-| cavalry        |                              | picture|    | had   |
-|                |                              |             | 1,100 |
-|                |                              |             | cav   |
-|                |                              |             | alry. |
-|                |                              |             | Horse |
-|                |                              |             | pi    |
-|                |                              |             | cture |
-|                |                              |             | is    |
-|                |                              |             | i     |
-|                |                              |             | nspir |
-|                |                              |             | ation |
-|                |                              |             | for   |
-|                |                              |             | B     |
-|                |                              |             | eau’s |
-|                |                              |             | ca    |
-|                |                              |             | valry |
-|                |                              |             | a     |
-|                |                              |             | vatar |
-+----------------+------------------------------+-------------+-------+
-| French cavalry | |Spanish cavalry avatar|     | |Horse      | The   |
-|                |                              | picture|    | n     |
-|                |                              |             | umber |
-|                |                              |             | of    |
-|                |                              |             | F     |
-|                |                              |             | rench |
-|                |                              |             | ca    |
-|                |                              |             | valry |
-|                |                              |             | is    |
-|                |                              |             | un    |
-|                |                              |             | known |
-+----------------+------------------------------+-------------+-------+
-| English Arrow  | |English arrow avatar|       |             | The   |
-|                |                              |             | En    |
-|                |                              |             | glish |
-|                |                              |             | had   |
-|                |                              |             | ar    |
-|                |                              |             | chers |
-|                |                              |             | among |
-|                |                              |             | their |
-|                |                              |             | 1     |
-|                |                              |             | 1,000 |
-|                |                              |             | infa  |
-|                |                              |             | ntry. |
-+----------------+------------------------------+-------------+-------+
-| French Lance   | |French lance avatar|        |             | The   |
-|                |                              |             | F     |
-|                |                              |             | rench |
-|                |                              |             | ca    |
-|                |                              |             | valry |
-|                |                              |             | had   |
-|                |                              |             | l     |
-|                |                              |             | ances |
-|                |                              |             | that  |
-|                |                              |             | they  |
-|                |                              |             | used  |
-|                |                              |             | in    |
-|                |                              |             | b     |
-|                |                              |             | attle |
-|                |                              |             | for   |
-|                |                              |             | r     |
-|                |                              |             | anged |
-|                |                              |             | and   |
-|                |                              |             | close |
-|                |                              |             | co    |
-|                |                              |             | mbat. |
-+----------------+------------------------------+-------------+-------+
-| Background     | |Georg Lemberger painting    | |Original   | The   |
-|                | used as background|          | painting|   | pai   |
-|                |                              |             | nting |
-|                |                              |             | of    |
-|                |                              |             | the   |
-|                |                              |             | b     |
-|                |                              |             | attle |
-|                |                              |             | by    |
-|                |                              |             | Georg |
-|                |                              |             | Lembe |
-|                |                              |             | rger. |
-|                |                              |             | It is |
-|                |                              |             | faded |
-|                |                              |             | here  |
-|                |                              |             | to    |
-|                |                              |             | make  |
-|                |                              |             | a     |
-|                |                              |             | backg |
-|                |                              |             | round |
-|                |                              |             | for   |
-|                |                              |             | the   |
-|                |                              |             | game  |
-+----------------+------------------------------+-------------+-------+
++----------+-----------------+-----------------+----------------------+
+| Name     | Game Avatar     | Original        | Notes                |
++==========+=================+=================+======================+
+| Henry    | |Beau’s Henry   | |Henry VIII|    | King Henry led his   |
+| VIII     | VIII Avatar|    |                 | army into battle and |
+| (Tudor)  |                 |                 | was married 6 times, |
+|          |                 |                 | to Catherine Parr    |
+|          |                 |                 | Catherine Howard,    |
+|          |                 |                 | Anne of Cleves, Jane |
+|          |                 |                 | Seymour, Anne Boleyn |
+|          |                 |                 | and Catherine of     |
+|          |                 |                 | Aragon.              |
++----------+-----------------+-----------------+----------------------+
+| Pierre   | |Beau’s Pierre  | |Pierre         | Pierre Terrail,      |
+| Terrail  | Terrail Avatar| | Terrail,        | seigneur de Bayard,  |
+|          |                 | seigneur de     | one of the French    |
+|          |                 | Bayard|         | commanders in the    |
+|          |                 |                 | battle               |
++----------+-----------------+-----------------+----------------------+
+| English  | |English        | |Horse picture| | Henry had 1,100      |
+| cavalry  | cavalry avatar| |                 | cavalry. Horse       |
+|          |                 |                 | picture is           |
+|          |                 |                 | inspiration for      |
+|          |                 |                 | Beau’s cavalry       |
+|          |                 |                 | avatar               |
++----------+-----------------+-----------------+----------------------+
+| French   | |Spanish        | |Horse picture| | The number of French |
+| cavalry  | cavalry avatar| |                 | cavalry is unknown   |
++----------+-----------------+-----------------+----------------------+
+| English  | |English arrow  |                 | The English had      |
+| Arrow    | avatar|         |                 | archers among their  |
+|          |                 |                 | 11,000 infantry.     |
++----------+-----------------+-----------------+----------------------+
+| French   | |French lance   |                 | The French cavalry   |
+| Lance    | avatar|         |                 | had lances that they |
+|          |                 |                 | used in battle for   |
+|          |                 |                 | ranged and close     |
+|          |                 |                 | combat.              |
++----------+-----------------+-----------------+----------------------+
+| Ba       | |Georg          | |Original       | The painting of the  |
+| ckground | Lemberger       | painting|       | battle by Georg      |
+|          | painting used   |                 | Lemberger. It is     |
+|          | as background|  |                 | faded here to make a |
+|          |                 |                 | background for the   |
+|          |                 |                 | game                 |
++----------+-----------------+-----------------+----------------------+
 
 .. |Beau’s Henry VIII Avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/henry.gif
    :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/henry.gif
