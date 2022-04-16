@@ -1,5 +1,9 @@
 #!/bin/sh
 
+cd ..
+git pull
+cd docs
+
 # copy the top level files
 cp ../*.md  source
 cp ../*.gif source

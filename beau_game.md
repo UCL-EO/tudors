@@ -1,3 +1,3 @@
 # The Game
 
-[Start the game](beau.html)
+[Start the game](http://www2.geog.ucl.ac.uk/~plewis/tudors/beau.html)
