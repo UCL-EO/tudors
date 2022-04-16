@@ -160,33 +160,32 @@ Characters in the game level
 |                |                              |             | to    |
 |                |                              |             | make  |
 |                |                              |             | a     |
-|                |                              |             | b     |
-|                |                              |             | ackgr |
-|                |                              |             | oubnd |
+|                |                              |             | backg |
+|                |                              |             | round |
 |                |                              |             | for   |
 |                |                              |             | the   |
 |                |                              |             | game  |
 +----------------+------------------------------+-------------+-------+
 
-.. |Beau’s Henry VIII Avatar| image:: henry.gif
-   :target: henry.gif
+.. |Beau’s Henry VIII Avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/henry.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/henry.gif
 .. |Henry VIII| image:: http://www.luminarium.org/renlit/henry81540c.jpg
    :target: http://www.luminarium.org/renlit/tudor.htm
-.. |Beau’s Pierre Terrail Avatar| image:: pierre.gif
-   :target: pierre.gif
+.. |Beau’s Pierre Terrail Avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/pierre.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/pierre.gif
 .. |Pierre Terrail, seigneur de Bayard| image:: https://upload.wikimedia.org/wikipedia/commons/5/59/Pierre_Terrail_de_Bayard.jpg
    :target: https://en.wikipedia.org/wiki/Pierre_Terrail,_seigneur_de_Bayard
-.. |English cavalry avatar| image:: rhorse_1.gif
-   :target: rhorse_1.gif
+.. |English cavalry avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/rhorse_1.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/rhorse_1.gif
 .. |Horse picture| image:: https://thumbs.dreamstime.com/z/bay-stallion-free-run-fast-desert-dust-horse-galloping-sand-184357183.jpg
    :target: https://www.dreamstime.com/bay-stallion-free-run-fast-desert-dust-horse-galloping-sand-image184357183
-.. |Spanish cavalry avatar| image:: horse_1.gif
-   :target: rhorse_1.gif
-.. |English arrow avatar| image:: arrow.gif
-   :target: arrow.gif
-.. |French lance avatar| image:: back_arrow.gif
-   :target: back_arrow.gif
-.. |Georg Lemberger painting used as background| image:: background.gif
-   :target: background.gif
+.. |Spanish cavalry avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/horse_1.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/rhorse_1.gif
+.. |English arrow avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/arrow.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/arrow.gif
+.. |French lance avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/back_arrow.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/back_arrow.gif
+.. |Georg Lemberger painting used as background| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/background.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/background.gif
 .. |Original painting| image:: https://upload.wikimedia.org/wikipedia/commons/f/f5/Georg_Lemberger%2C_Battle_of_Guinegate_%281513%29%2C_Triumphzug_Kaiser_Maximilians.jpg
    :target: https://en.wikipedia.org/wiki/Battle_of_the_Spurs

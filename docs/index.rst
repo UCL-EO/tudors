@@ -10,15 +10,13 @@ Welcome to Beau's Tudor Project
    :maxdepth: 2
    :caption: Contents:
 
-   background.md
-   background_spurs.md
-   background_armada.md
-   help.md
-   beau_game.md
+   background.rst
+   background_spurs.rst
+   background_armada.rst
+   help.rst
+   beau_game.rst
 
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

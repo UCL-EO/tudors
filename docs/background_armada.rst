@@ -199,23 +199,23 @@ Characters in the game level
 |                |                              |             | >`__. |
 +----------------+------------------------------+-------------+-------+
 
-.. |Francis Drake| image:: drake.gif
-   :target: drake.gif
+.. |Francis Drake| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif
 .. |image1| image:: https://dynaimage.cdn.cnn.com/cnn/q_auto,w_1199,c_fill,g_auto,h_674,ar_16:9/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F180531122429-02-francis-drake-wart-portrait.jpg
    :target: https://edition.cnn.com/style/article/francis-drake-wart-authentication-intl/index.html
-.. |Philip II| image:: philip2.gif
-   :target: philip2.gif
-.. |Philip II of Spain| image:: philip2fullNew.gif
-.. |image2| image:: englishship_1.gif
-.. |image3| image:: spanishship_1.gif
-.. |Bowls ball avatar| image:: ball.gif
-   :target: ball.gif
+.. |Philip II| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/philip2.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/philip2.gif
+.. |Philip II of Spain| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/philip2fullNew.gif
+.. |image2| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/englishship_1.gif
+.. |image3| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/spanishship_1.gif
+.. |Bowls ball avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/ball.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/ball.gif
 .. |Sir Francis Drake, picture, image, illustration| image:: https://www.lookandlearn.com/history-images/preview/A/A003/A003428-03.jpg
    :target: https://www.lookandlearn.com/history-images/preview/A/A003/A003428-03.jpg
-.. |cannon shot| image:: cannon.gif
-   :target: cannon.gif
+.. |cannon shot| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/cannon.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/cannon.gif
 .. |Shot| image:: https://upload.wikimedia.org/wikipedia/commons/d/de/MaryRose-round_shot.JPG
    :target: https://en.wikipedia.org/wiki/Round_shot
-.. |Armada map| image:: background2.gif
-   :target: background2.gif
+.. |Armada map| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/background2.gif
+   :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/background2.gif
 .. |The Battle of Gravelines, Mon 8th August| image:: https://www.nmrn.org.uk/sites/default/files/14569_10.jpg
