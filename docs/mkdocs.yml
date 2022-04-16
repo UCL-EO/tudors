@@ -5,7 +5,7 @@ nav:
         - The Armada: background_armada.md
     - Help: help.md
     - Game: beau_game.md
-docs_dir: "."
+docs_dir: "docs"
 repo_url: https://github.com/UCL-EO/tudors
 site_author: Beau Lewis
 site_name: Tudors
