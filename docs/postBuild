@@ -1,1 +1,1 @@
-cp ../*.gif source
+cp *.gif  _build/html
