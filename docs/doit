@@ -1,15 +1,17 @@
 #!/bin/sh
 
+# pull latest
 cd ..
 git pull
 cd docs
 
 # copy the top level files
-cp ../*.md  source
+cp ../*.md . 
+cp ../*.gif . 
+mkdir -p source
 cp ../*.gif source
 
 # write an rst file for each
-cd source
 files="$(ls *.md|awk -F. '{print $1}')"
 echo $files
 
@@ -19,7 +21,6 @@ do
   echo "$i.rst"
 done
 
-cd ..
 make html
 # install the game
 cp ../beau.html build/html
