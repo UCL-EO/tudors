@@ -1,15 +1,17 @@
-#Tudor Wars
+# Tudor Wars
 
 By Beau Lewis.
 
-##The aim of the game
+## The aim of the game
 something
 
-###How to move
+### How to move
 
-####keyboard keys
+
+#### keyboard keys
+
 something
 
-####buttons
+#### buttons
 something
 
