@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# copy the top level files
+cp ../*.md  source
+cp ../*.gif source
+
+# write an rst file for each
+cd source
+files="$(ls *.md|awk -F. '{print $1}')"
+echo $files
+
+for i in $files
+do
+  pandoc "$i.md" --from markdown --to rst -s -o "$i.rst"
+  echo "$i.rst"
+done
+cd ..
+make html
