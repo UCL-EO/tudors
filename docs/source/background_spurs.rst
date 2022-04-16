@@ -176,7 +176,7 @@ Characters in the game level
    :target: pierre.gif
 .. |Pierre Terrail, seigneur de Bayard| image:: https://upload.wikimedia.org/wikipedia/commons/5/59/Pierre_Terrail_de_Bayard.jpg
    :target: https://en.wikipedia.org/wiki/Pierre_Terrail,_seigneur_de_Bayard
-.. |English cavalry avatar| image:: horse_1.gif
+.. |English cavalry avatar| image:: rhorse_1.gif
    :target: rhorse_1.gif
 .. |Horse picture| image:: https://thumbs.dreamstime.com/z/bay-stallion-free-run-fast-desert-dust-horse-galloping-sand-184357183.jpg
    :target: https://www.dreamstime.com/bay-stallion-free-run-fast-desert-dust-horse-galloping-sand-image184357183
