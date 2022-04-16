@@ -50,10 +50,12 @@ var speedscale = 600
 var pause_game = 0
 var wait = 0
 
+// was y    : 633,
+
 var background = {
   file : "background.gif",
   x    : 1024,
-  y    : 633,
+  y    : 500,
   startx : 0,
   starty : 0,
   type : "image",
@@ -940,7 +942,7 @@ function updateGameArea() {
 function addLineOfCastles(myPiece,n,x,sizex,sizey,gif) {
     gif = gif + "_1.gif"
     for  (i = 0; i < n; i += 1) {
-        y = Math.floor(i*myGameArea.canvas.height/n + sizey/4)
+        y = Math.floor(i*myGameArea.canvas.height/n + sizey/8)
         // new castle obj
         castle = {
           file : gif,
@@ -1085,11 +1087,16 @@ window.addEventListener('resize', resize, false);
 <center>
 <button type="button" onmousedown="myGamePiece.up(4)" onmouseover="myGamePiece.up(1)" onmouseup="myGamePiece.stopy()" ontouchstart="myGamePiece.up(1)">UP</button><br>
 <button type="button" onmousedown="myGamePiece.left(4)" onmouseover="myGamePiece.left(1)" onmouseup="myGamePiece.stopx()" ontouchstart="myGamePiece.left(1)">LEFT</button>
+<button type="button" onmousedown="myGamePiece.stop()" onmouseover="myGamePiece.stop()" onmouseup="myGamePiece.stop()" ontouchstart="myGamePiece.stop()">STOP</button>
 <button type="button" onmousedown="myGamePiece.right(4)" onmouseover="myGamePiece.right(1)" onmouseup="myGamePiece.stopx()" ontouchstart="myGamePiece.right(1)">RIGHT</button>
 <br>
 <button type="button" onmousedown="myGamePiece.down(4)" onmouseover="myGamePiece.down(1)" onmouseup="myGamePiece.stopy()" ontouchstart="myGamePiece.down(1)">DOWN</button>
 <br>
 <button type="button" onmouseover="myGamePiece.fire()" onmousedown="myGamePiece.fire()" onmouseup="myGamePiece.fire()" ontouchstart="myGamePiece.fire()">FIRE</button>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <button type="button onmousedown="bg()" onmouseover="bg()">Background</button>
