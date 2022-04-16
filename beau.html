@@ -17,6 +17,23 @@ canvas {
 <body onload="startGame()">
 
 <script>
+// from https://www.w3schools.com/graphics/game_sound.asp
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function(){
+    this.sound.play();
+  }
+  this.stop = function(){
+    this.sound.pause();
+  }
+}
+
+
 // for testing
 //const hobbit = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit­hole, and that means comfort.  It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube­shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats ­ the hobbit was fond of visitors. The tunnel wound on and on, going fairly but not quite straight into the side of the hill ­ The Hill, as all the people for many miles round called it ­ and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining­rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left­hand side (going in), for these were the only ones to have windows, deep­set round windows looking over his garden and meadows beyond, sloping down to the river."
 const hobbit = "In a hole"
@@ -49,6 +66,8 @@ var test=0;
 var speedscale = 600
 var pause_game = 0
 var wait = 0
+var mySound = new sound("crash.mp3");
+var winSound = new sound("greensleeves-flute-and-guitar.mp3");
 
 // was y    : 633,
 
@@ -504,6 +523,7 @@ function component(obj) {
     // what happens when you win
     this.win = function() {
         // clear the deck
+        winSound.play()
         level_up=0;
         clear_bullets(this)
         clear_bullets(yourGamePiece)
@@ -523,10 +543,15 @@ function component(obj) {
             myGame.text="LEVEL UP"
             myGame2.text=""
             pause_game=1
-            wait=pause_count
+            wait=pause_count * 10
             level += 1
             level_up=1
-            updateGameArea()
+
+            myGamePiece.x = Math.floor(background.x/2)
+            myGamePiece.y = Math.floor(background.y/2)
+            myGamePiece.width *= 3
+            myGamePiece.height *= 3
+            //updateGameArea()
             // next level
         }
         myGame.update();
@@ -598,6 +623,7 @@ function component(obj) {
         if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
             crash = false;
         }
+        if ( crash ) mySound.play();
         return crash;
     }
     // fire and add to myBullets
@@ -843,6 +869,7 @@ function updateGameArea() {
         //myGame.update();
         return;
     }
+    winSound.stop()
     // action on level up
     if (level_up == 1 ) {
         level_up = 0
@@ -946,24 +973,15 @@ function updateGameArea() {
     // test for lose
     for (i = 0; i < yourGamePiece.myCastles.length; i += 1) {
         if ( yourGamePiece.myCastles[i].x < -10 ) {
-            if ( level == maxlevels ) {
-                myGame.text="DOWN A LEVEL"
-                level -= 1
-                if ( level < 1 ) level = 1
-                myGame2.text="PAUSED"
-                //updateGameArea()
-                reset()
-            } else {
-                myGame.text="GAME OVER"
-                myPiece.iwon=0;
-                gameover = 1;
-                yourPiece.iwon=1;
-                yourPiece.x = Math.floor(background.x/2)
-                yourPiece.y = Math.floor(background.y/2)
-                yourPiece.width *= 3
-                yourPiece.height *= 3
-                //myGame.update();
-            }
+            myGame.text="GAME OVER"
+            myPiece.iwon=0;
+            gameover = 1;
+            yourPiece.iwon=1;
+            yourPiece.x = Math.floor(background.x/2)
+            yourPiece.y = Math.floor(background.y/2)
+            yourPiece.width *= 3
+            yourPiece.height *= 3
+            //myGame.update();
             for (i = 0; i < myGamePiece.myBullets.length; i += 1) {
                 myGamePiece.myBullets[i].active = 0
             }
@@ -1008,6 +1026,7 @@ function maxy(n) {
 
 
 function reset_level1(){
+    winSound.play()
     myAvatarFrame=myAvatar
     yourAvatarFrame=yourAvatar
     backgroundFrame=background
