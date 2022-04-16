@@ -8,6 +8,8 @@ cd docs
 # copy the top level files
 cp ../*.md . 
 cp ../*.gif . 
+mkdir -p source
+cp ../*.gif source
 
 # write an rst file for each
 files="$(ls *.md|awk -F. '{print $1}')"
