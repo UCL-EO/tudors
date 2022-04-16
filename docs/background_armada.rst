@@ -79,6 +79,42 @@ Characters in the game level
 |                |                              |             | ba    |
 |                |                              |             | ttle. |
 +----------------+------------------------------+-------------+-------+
+| English ship   | |image2|                     |             | the   |
+|                |                              |             | en    |
+|                |                              |             | glish |
+|                |                              |             | had   |
+|                |                              |             | 34    |
+|                |                              |             | armed |
+|                |                              |             | wars  |
+|                |                              |             | hips, |
+|                |                              |             | l     |
+|                |                              |             | oaded |
+|                |                              |             | with  |
+|                |                              |             | sol   |
+|                |                              |             | diers |
+|                |                              |             | and   |
+|                |                              |             | can   |
+|                |                              |             | nons. |
++----------------+------------------------------+-------------+-------+
+| Spanish ship   | |image3|                     |             | this  |
+|                |                              |             | inc   |
+|                |                              |             | ludes |
+|                |                              |             | the   |
+|                |                              |             | flag  |
+|                |                              |             | of    |
+|                |                              |             | the   |
+|                |                              |             | sp    |
+|                |                              |             | anish |
+|                |                              |             | em    |
+|                |                              |             | pire, |
+|                |                              |             | not   |
+|                |                              |             | the   |
+|                |                              |             | one   |
+|                |                              |             | we    |
+|                |                              |             | see   |
+|                |                              |             | t     |
+|                |                              |             | oday. |
++----------------+------------------------------+-------------+-------+
 | Bowls ball     | |Bowls ball avatar|          | |Sir        | Fr    |
 |                |                              | Francis     | ancis |
 |                |                              | Drake,      | Drake |
@@ -170,6 +206,8 @@ Characters in the game level
 .. |Philip II| image:: philip2.gif
    :target: philip2.gif
 .. |Philip II of Spain| image:: philip2fullNew.gif
+.. |image2| image:: englishship_1.gif
+.. |image3| image:: spanishship_1.gif
 .. |Bowls ball avatar| image:: ball.gif
    :target: ball.gif
 .. |Sir Francis Drake, picture, image, illustration| image:: https://www.lookandlearn.com/history-images/preview/A/A003/A003428-03.jpg
