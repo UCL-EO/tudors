@@ -31,26 +31,12 @@ The Spanish Armada was a fleet of 130 ships that were sent to invade England in 
 
 | Name          | Game Avatar           | Original  | Notes |
 | ------------- |:---------------------:|:---------:|:----- |
-|Background | [![Armada map](background2.gif)](background2.gif) | ![The Pursuit to Calais, Fri 5th August – Sat 6th August](https://www.nmrn.org.uk/sites/default/files/14569_8.jpg"The Pursuit to Calais, Fri 5th August – Sat 6th August") |The Pursuit to Calais, Fri 5th August – Sat 6th August. Map from [NMRN](https://www.nmrn.org.uk/major-appeals/armada-maps).|
+| Francis Drake | [![Francis Drake](drake.gif)](drake.gif) | [![Francis Drake](https://dynaimage.cdn.cnn.com/cnn/q_auto,w_1199,c_fill,g_auto,h_674,ar_16:9/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F180531122429-02-francis-drake-wart-portrait.jpg)](https://edition.cnn.com/style/article/francis-drake-wart-authentication-intl/index.html) | [![Sir Francis Drake, picture, image, illustration](https://www.lookandlearn.com/history-images/preview/A/A003/A003428-03.jpg)](https://www.lookandlearn.com/history-images/preview/A/A003/A003428-03.jpg) Sir Francis Drake finishes his game of bowls on Plymouth Hoe as the Spanish Armada is sighted, by [Peter Jackson](https://www.lookandlearn.com/history-images/search.php?search=Peter+Jackson&amp;bool=phrase) |
+|Philip II of Spain| [![Philip II](philip2.gif)](philip2.gif) | ![Philip II of Spain](https://bit.ly/3JOgFQX)| Philip II was King of Spain. He sent hisd admirasls and soldiers to invade England in the Armada. |
+|Background | [![Armada map](background2.gif)](background2.gif) | ![The Battle of Gravelines, Mon 8th August](https://www.nmrn.org.uk/sites/default/files/14569_10.jpg "The Battle of Gravelines, Mon 8th August") | This map from the Battle of Gravelines, Mon 8th August.The Battle of Gravelines, Mon 8th August Map from [NMRN](https://www.nmrn.org.uk/major-appeals/armada-maps).|
 
 
-<center>
-<a href="https://www.nmrn.org.uk/major-appeals/armada-maps/view-armada-maps"><img src="https://www.nmrn.org.uk/sites/default/files/14569_8.jpg" alt=The Pursuit to Calais, Fri 5th August – Sat 6th August" width="386"></a>
-The Pursuit to Calais, Fri 5th August – Sat 6th August <a title="Armada" href="https://www.nmrn.org.uk/major-appeals/armada-maps/view-armada-maps">Museum maps</a>
-
-<p>
-
-</center>
 
 
-<p>
 
-
-<center>
-<a href="https://www.lookandlearn.com/history-images/A003428-03/The-Great-Armada-Playing-Bowls"><img src="https://www.lookandlearn.com/history-images/preview/A/A003/A003428-03.jpg" alt="Sir Francis Drake, picture, image, illustration" width="386" height="512"></a>
-Sir Francis Drake finishes his game of bowls on Plymouth Hoe as the Spanish Armada is sighted, by <a title="Peter Jackson" href="https://www.lookandlearn.com/history-images/search.php?search=Peter+Jackson&amp;bool=phrase">Peter Jackson</a>
-</center>
-
-<p>
-
-</body>
+[![Philip II of Spain](https://upload.wikimedia.org/wikipedia/commons/2/2d/Portrait_of_Philip_II_of_Spain_by_Sofonisba_Anguissola_-_002b.jpg)](https://en.wikipedia.org/wiki/Philip_II_of_Spain) | Philip II was King of Spain. He sent hisd admirasls and soldiers to invade England in the Armada. |
