@@ -15,12 +15,45 @@ Characters in the game level
 +----------------+------------------------------+-------------+-------+
 | Name           | Game Avatar                  | Original    | Notes |
 +================+==============================+=============+=======+
-| Henry VIII     | |Beau’s Henry VIII Avatar|   | |Henry      | Henry |
-| (Tudor)        |                              | VIII|       | was   |
-|                |                              |             | King  |
+| Henry VIII     | |Beau’s Henry VIII Avatar|   | |Henry      | King  |
+| (Tudor)        |                              | VIII|       | Henry |
+|                |                              |             | led   |
+|                |                              |             | his   |
+|                |                              |             | army  |
+|                |                              |             | into  |
+|                |                              |             | b     |
+|                |                              |             | attle |
+|                |                              |             | and   |
+|                |                              |             | was   |
+|                |                              |             | ma    |
+|                |                              |             | rried |
+|                |                              |             | 6     |
+|                |                              |             | t     |
+|                |                              |             | imes, |
+|                |                              |             | to    |
+|                |                              |             | Cath  |
+|                |                              |             | erine |
+|                |                              |             | Parr  |
+|                |                              |             | Cath  |
+|                |                              |             | erine |
+|                |                              |             | Ho    |
+|                |                              |             | ward, |
+|                |                              |             | Anne  |
 |                |                              |             | of    |
-|                |                              |             | En    |
-|                |                              |             | gland |
+|                |                              |             | Cl    |
+|                |                              |             | eves, |
+|                |                              |             | Jane  |
+|                |                              |             | Sey   |
+|                |                              |             | mour, |
+|                |                              |             | Anne  |
+|                |                              |             | B     |
+|                |                              |             | oleyn |
+|                |                              |             | and   |
+|                |                              |             | Cath  |
+|                |                              |             | erine |
+|                |                              |             | of    |
+|                |                              |             | Ar    |
+|                |                              |             | agon. |
 +----------------+------------------------------+-------------+-------+
 | Pierre Terrail | |Beau’s Pierre Terrail       | |Pierre     | P     |
 |                | Avatar|                      | Terrail,    | ierre |
@@ -83,8 +116,10 @@ Characters in the game level
 |                |                              |             | chers |
 |                |                              |             | among |
 |                |                              |             | their |
-|                |                              |             | inf   |
-|                |                              |             | antry |
+|                |                              |             | 1     |
+|                |                              |             | 1,000 |
+|                |                              |             | infa  |
+|                |                              |             | ntry. |
 +----------------+------------------------------+-------------+-------+
 | French Lance   | |French lance avatar|        |             | The   |
 |                |                              |             | F     |
@@ -94,10 +129,19 @@ Characters in the game level
 |                |                              |             | had   |
 |                |                              |             | l     |
 |                |                              |             | ances |
+|                |                              |             | that  |
 |                |                              |             | they  |
-|                |                              |             | ch    |
-|                |                              |             | arged |
-|                |                              |             | with  |
+|                |                              |             | used  |
+|                |                              |             | in    |
+|                |                              |             | b     |
+|                |                              |             | attle |
+|                |                              |             | for   |
+|                |                              |             | r     |
+|                |                              |             | anged |
+|                |                              |             | and   |
+|                |                              |             | close |
+|                |                              |             | co    |
+|                |                              |             | mbat. |
 +----------------+------------------------------+-------------+-------+
 | Background     | |Georg Lemberger painting    | |Original   | The   |
 |                | used as background|          | painting|   | pai   |
@@ -133,10 +177,10 @@ Characters in the game level
 .. |Pierre Terrail, seigneur de Bayard| image:: https://upload.wikimedia.org/wikipedia/commons/5/59/Pierre_Terrail_de_Bayard.jpg
    :target: https://en.wikipedia.org/wiki/Pierre_Terrail,_seigneur_de_Bayard
 .. |English cavalry avatar| image:: horse_1.gif
-   :target: horse_1.gif
+   :target: rhorse_1.gif
 .. |Horse picture| image:: https://thumbs.dreamstime.com/z/bay-stallion-free-run-fast-desert-dust-horse-galloping-sand-184357183.jpg
    :target: https://www.dreamstime.com/bay-stallion-free-run-fast-desert-dust-horse-galloping-sand-image184357183
-.. |Spanish cavalry avatar| image:: rhorse_1.gif
+.. |Spanish cavalry avatar| image:: horse_1.gif
    :target: rhorse_1.gif
 .. |English arrow avatar| image:: arrow.gif
    :target: arrow.gif
