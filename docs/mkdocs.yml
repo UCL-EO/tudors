@@ -1,9 +1,11 @@
+---
 nav:
-- Background: 'background.md'
-- Battle of the Spurs: 'background_spurs.md'
-- The Armada: 'background_armada.md'
-- Help: 'help.md'
-- Game: 'beau_game.md'
+  Background: background.md
+  Battles:
+    Battle of the Spurs: background_spurs.md
+    The Armada: background_armada.md
+  Help: help.md
+  Game: beau_game.md
 repo_url: https://github.com/UCL-EO/tudors
 site_author: Beau Lewis
 site_name: Tudors
