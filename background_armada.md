@@ -3,6 +3,9 @@
 
 The Spanish Armada was a fleet of 130 ships that were sent to invade England in late may 1588 by king Phillip the second. This resulted in a battle from May until August 1588. Francis drake was playing a game of bowls when the Spanish invaded and waited until he was finished to attack back. England had 34 warships and 163 armed merchant vessels whereas the Spanish had 108 armed merchant vessels, 2,431 cannons, 7,000 sailors and 17,000 soldiers.(the English also had 30 flyboats as they had teamed up with the Dutches. This eventually ended in an English victory.
 
+HELLO
+
+
 ## Characters in the game level
 
 | Name          | Game Avatar           | Original  | Notes |
