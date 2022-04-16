@@ -3,3 +3,5 @@ build/*
 docs/build/*
 docs/source/*.gif
 docs/source/*.md
+.DS_Store
+*/.DS_Store

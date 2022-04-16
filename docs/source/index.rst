@@ -3,9 +3,7 @@ Welcome to the Tudors
 
 Hello there 
 
-.. note::
-
-  By Beaui Lewis.
+  By Beau Lewis.
 
 Contents
 --------
@@ -16,3 +14,4 @@ Contents
    background_spurs.rst
    background_armada.rst
    help.rst
+   beau_game.rst

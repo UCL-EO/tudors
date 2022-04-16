@@ -14,5 +14,10 @@ do
   pandoc "$i.md" --from markdown --to rst -s -o "$i.rst"
   echo "$i.rst"
 done
+
 cd ..
 make html
+# install the game
+cp ../beau.html build/html
+
+
