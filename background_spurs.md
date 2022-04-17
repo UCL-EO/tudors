@@ -1,7 +1,7 @@
 
 # The Battle of The Spurs
 
-The battle of the Spurs is a battle between England and France. It took place on 16 August 1513. The English were led by king Henry the eighth and the French by Pierre terrail. Henry’s armies consisted of about 1,100 horseback and 11,000 foot soldiers whereas Pierre’s had around 8,000 horseback and an unknown amount of foot soldiers. A famous picture is included by Georg Lemberger. The battle was eventually won by Henry and his army.It got it's name because of the haste of the french horses to leave the battlefield since the English ammbassador in Spain later joked that the french had learnt to ride fast at the "jurney of the spurrs".
+The battle of the Spurs is a battle between England and France. It took place on 16 August 1513. The English were led by king Henry the eighth and the French by Pierre terrail. Henry’s armies consisted of about 1,100 horseback and 11,000 foot soldiers whereas Pierre’s had around 8,000 horseback and an unknown amount of foot soldiers. A famous picture is included by Georg Lemberger. The battle was eventually won by Henry and his army. It is rumoured that it got it's name because the french were so hasty to leave that they left their spurs behind.
 ## Characters in the game level
 
 | Name          | Game Avatar           | Original  | Notes |
