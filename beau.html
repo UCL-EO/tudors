@@ -559,8 +559,8 @@ function component(obj) {
     this.newPos = function(isPiece) {
         this.x += this.speedX;
         this.y += this.speedY;
-        //if (this.hitEnemy(isPiece)) return true;
-        this.hitEnemy(isPiece)
+        // you cant win if youre dead
+        if (this.lives) this.hitEnemy(isPiece)
         this.hitBottom(isPiece);
         this.hitTop(isPiece);
         this.hitLeft(isPiece);
@@ -893,6 +893,7 @@ function amIHit(myPiece,yourPiece) {
                 // game over
                 mySoundLoseFrame.play()
                 myGame.text="GAME OVER"
+                //amIHit(myGamePiece,yourGamePiece) 
                 if ( level == 1 ) {
                   document.getElementById("meet").innerHTML = loseOneText
                 } else {
