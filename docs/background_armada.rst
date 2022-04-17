@@ -54,16 +54,7 @@ Characters in the game level
 |           |               | Hoe as the    |                        |
 |           |               | Spanish       |                        |
 |           |               | Armada is     |                        |
-|           |               | sighted, by   |                        |
-|           |               | `Peter        |                        |
-|           |               | Jackson <     |                        |
-|           |               | https://www.l |                        |
-|           |               | ookandlearn.c |                        |
-|           |               | om/history-im |                        |
-|           |               | ages/search.p |                        |
-|           |               | hp?search=Pet |                        |
-|           |               | er+Jackson&bo |                        |
-|           |               | ol=phrase>`__ |                        |
+|           |               | sighted       |                        |
 +-----------+---------------+---------------+------------------------+
 | Cannon    | |cannon shot| | |Shot|        | The Tudor period       |
 | shot      |               |               | introduced cannons,    |

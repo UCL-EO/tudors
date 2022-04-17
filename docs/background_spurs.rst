@@ -7,10 +7,9 @@ and the French by Pierre terrail. Henry’s armies consisted of about
 1,100 horseback and 11,000 foot soldiers whereas Pierre’s had around
 8,000 horseback and an unknown amount of foot soldiers. A famous picture
 is included by Georg Lemberger. The battle was eventually won by Henry
-and his army.
-
-Characters in the game level
-----------------------------
+and his army. It is rumoured that it got it’s name because the french
+were so hasty to leave that they left their spurs behind. ## Characters
+in the game level
 
 +----------+-----------------+-----------------+----------------------+
 | Name     | Game Avatar     | Original        | Notes                |
@@ -34,9 +33,8 @@ Characters in the game level
 | English  | |English        | |Horse picture| | Henry had 1,100      |
 | cavalry  | cavalry avatar| |                 | cavalry. Horse       |
 |          |                 |                 | picture is           |
-|          |                 |                 | inspiration for      |
-|          |                 |                 | Beau’s cavalry       |
-|          |                 |                 | avatar               |
+|          |                 |                 | inspiration for my   |
+|          |                 |                 | cavalry avatar       |
 +----------+-----------------+-----------------+----------------------+
 | French   | |Spanish        | |Horse picture| | The number of French |
 | cavalry  | cavalry avatar| |                 | cavalry is unknown   |
