@@ -72,6 +72,9 @@ var mySoundFrame = mySound
 var winSound = new sound("greensleeves-flute-and-guitar.mp3");
 var winSound2 = new sound("hampton_court.mp3");
 var winSoundFrame = winSound
+var mySoundLose = new sound("spanish-renaissance-music.m4a")
+var mySoundLose2 = new sound("spanish-renaissance-music.m4a")
+var mySoundLoseFrame = mySoundLose
 
 // was y    : 633,
 
@@ -778,6 +781,7 @@ function amIHit(myPiece,yourPiece) {
                     myPiece.myBullets[i].active = 0
                 }
                 // game over
+                mySoundLoseFrame.play()
                 myGame.text="GAME OVER"
                 myGame2.text=""
                 gameover = 1;
@@ -882,12 +886,15 @@ function updateGameArea() {
         return;
     }
     winSoundFrame.stop()
+    mySoundLoseFrame.stop()
     if ( level == 2 ) {
        winSoundFrame = winSound2
        mySoundFrame = mySound2
+       mySoundLoseFrame = mySoundLose2
     } else {
        winSoundFrame = winSound
        mySoundFrame = mySound
+       mySoundLoseFrame = mySoundLose
     }
     // action on level up
     if (level_up == 1 ) {
