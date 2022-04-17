@@ -56,6 +56,19 @@ in the game level
 |          |                 |                 | background for the   |
 |          |                 |                 | game                 |
 +----------+-----------------+-----------------+----------------------+
+| Music    |                 |                 | The song in the      |
+|          |                 |                 | battle of the spurs  |
+|          |                 |                 | level is called      |
+|          |                 |                 | greensleeves. It is  |
+|          |                 |                 | rumoured to have     |
+|          |                 |                 | been written by      |
+|          |                 |                 | Henry VIII for his   |
+|          |                 |                 | future love, Anne    |
+|          |                 |                 | Boleyn, who          |
+|          |                 |                 | eventually gained    |
+|          |                 |                 | the nickname         |
+|          |                 |                 | “greensleeves”.      |
++----------+-----------------+-----------------+----------------------+
 
 .. |Beau’s Henry VIII Avatar| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/henry.gif
    :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/henry.gif
