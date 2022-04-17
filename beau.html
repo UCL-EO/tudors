@@ -15,6 +15,8 @@ canvas {
 </head>
 
 <body  onload="startGame()">
+<p>Click in this area to fire.</p>
+<p id="demo"></p>
 <script>
 
 // from https://www.w3schools.com/graphics/game_sound.asp
@@ -331,9 +333,55 @@ function startGame(myAv,yourAv,bg) {
     myGameArea.start();
 }
 
+// dummies for printer
+var p1 = 5;
+var p2 = 7;
+// When true, moving the mouse draws on the canvas
+let isDrawing = false;
+let x = 0;
+let y = 0;
+
 var myGameArea = {
     score : 0,
     canvas : document.createElement("canvas"),
+    screen : document.addEventListener("mouseover", function() {
+      // use this to put messages on the screen when mouse over
+      p1 = ""
+      p2 = ""
+      printer(p1, p2); 
+    }),
+    // from https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
+    mdown : document.addEventListener('mousedown', e => {
+      e.returnValue = false;
+      e.preventDefault();
+      x = e.offsetX;
+      y = e.offsetY;
+      isDrawing = true;
+    }),
+    mup : document.addEventListener('mouseup', e => {
+      e.returnValue = false;
+      e.preventDefault();
+      if (isDrawing === true) {
+        x = 0;
+        y = 0;
+        isDrawing = false;
+      }
+    }),
+    mmove : document.addEventListener('mousemove', e => {
+      e.returnValue = false;
+      e.preventDefault();
+      if (isDrawing === true) {
+        x = e.offsetX;
+        y = e.offsetY;
+        printer(x,y)
+      }
+    }),
+    firer : document.addEventListener("click", function(event) {
+      event.returnValue = false;
+      event.preventDefault();
+      // the above should fix selction issues in browser
+      printer(myGamePiece.fire(),"");
+    }),
     keyboard : document.addEventListener("keydown", function(event) {
         if (event.key == "d" || event.key == "l") {
           myGamePiece.right(1);
@@ -380,6 +428,9 @@ var myGameArea = {
     }
 }
 
+function printer(a, b) {
+  document.getElementById("demo").innerHTML = a + " " + b;
+}
 
 printTextObj = function (obj) {
   // round up - use ceil
@@ -647,7 +698,10 @@ function component(obj) {
         if ( this.myBullets.length < maxArrows ) {
             this.myBullets.push(new component(translate_origin(myAvatarFrame.shot,this.x,this.y+Math.random()*70)));
             this.myBullets[this.myBullets.length-1].active=maxhits;
-        }
+            return("Fire")
+        }else{
+            return("Wait")
+        } 
     }
     this.down = function(n) {
         this.speedY = maxy(n);
