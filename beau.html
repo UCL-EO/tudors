@@ -614,6 +614,7 @@ function component(obj) {
     }
     // what happens when you win
     this.win = function() {
+        myGameArea.clear();
         // clear the deck
         winSoundFrame.play()
         level_up=0;
@@ -869,9 +870,34 @@ function loveHearts(myPiece) {
     if (nBroken > 0) myLife.text += "💔".repeat(nBroken)
     if (nLive > 0) myLife.text += "💚".repeat(nLive)
     // add on the level indicator
-    myLife.text += " " +  (level).toString()
+    myLife.text += " level " +  (level).toString()
     myLife.update();
     return
+}
+
+function loser(myPiece,yourPiece) {
+    // what happens if you lose
+    // game over
+    for (i = 0; i < myPiece.myBullets.length; i += 1) {
+      myPiece.myBullets[i].active = 0
+    } 
+    myGame.text="GAME OVER"
+    if ( level == 1 ) {
+      document.getElementById("meet").innerHTML = loseOneText
+    } else {
+      document.getElementById("meet").innerHTML = loseTwoText;
+    }
+    myGame2.text=""
+    gameover = 1;
+    myPiece.iwon=0;
+    yourPiece.iwon=1;
+    yourPiece.x = Math.floor(background.x/2)
+    yourPiece.y = Math.floor(background.y/2)
+    yourPiece.width *= 3
+    yourPiece.height *= 3
+    myGame.update();
+    mySoundLoseFrame.play()
+    return true
 }
 
 function amIHit(myPiece,yourPiece) {
@@ -885,31 +911,7 @@ function amIHit(myPiece,yourPiece) {
             myGame2.text=""
             loveHearts(myPiece)
             yourPiece.myBullets[i].active = 0
-            if ( myPiece.lives < 1 ) {
-                // what happens if you lose
-                for (i = 0; i < myPiece.myBullets.length; i += 1) {
-                    myPiece.myBullets[i].active = 0
-                }
-                // game over
-                mySoundLoseFrame.play()
-                myGame.text="GAME OVER"
-                //amIHit(myGamePiece,yourGamePiece) 
-                if ( level == 1 ) {
-                  document.getElementById("meet").innerHTML = loseOneText
-                } else {
-                  document.getElementById("meet").innerHTML = loseTwoText;
-                }
-                myGame2.text=""
-                gameover = 1;
-                myPiece.iwon=0;
-                yourPiece.iwon=1;
-                yourPiece.x = Math.floor(background.x/2)
-                yourPiece.y = Math.floor(background.y/2)
-                yourPiece.width *= 3
-                yourPiece.height *= 3
-                myGame.update();
-                return true
-            }
+            if ( myPiece.lives < 1 ) if (loser(myPiece,yourPiece)) return true
         }
     }
 
@@ -941,21 +943,7 @@ function amIHit(myPiece,yourPiece) {
           myPiece.removeCastle(yourPiece.myCastles[j])
           if ( myPiece.lives < 1 ) {
                 // what happens if you lose
-                myGame.text="GAME OVER"
-                myGame2.text=""
-                myPiece.iwon=0;
-                yourPiece.iwon=1;
-                gameover = 1;
-                yourPiece.x = Math.floor(background.x/2)
-                yourPiece.y = Math.floor(background.y/2)
-                yourPiece.width *= 3
-                yourPiece.height *= 3
-                //myGame.update();
-                for (i = 0; i < myPiece.myBullets.length; i += 1) {
-                    myPiece.myBullets[i].active = 0
-                }
-                myGame.update();
-                return true
+                return loser(myPiece,yourPiece)
           }
         }
       }
@@ -1115,20 +1103,7 @@ function updateGameArea() {
     // test for lose
     for (i = 0; i < yourGamePiece.myCastles.length; i += 1) {
         if ( yourGamePiece.myCastles[i].x < -10 ) {
-            myGame.text="GAME OVER"
-            myPiece.iwon=0;
-            gameover = 1;
-            yourPiece.iwon=1;
-            yourPiece.x = Math.floor(background.x/2)
-            yourPiece.y = Math.floor(background.y/2)
-            yourPiece.width *= 3
-            yourPiece.height *= 3
-            //myGame.update();
-            for (i = 0; i < myGamePiece.myBullets.length; i += 1) {
-                myGamePiece.myBullets[i].active = 0
-            }
-            myGame.update();
-            return true
+            return loser(myGamePiece,yourGamePiece)
         }
     }
     myGame.update();
