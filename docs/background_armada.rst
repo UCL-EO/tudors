@@ -69,6 +69,18 @@ Characters in the game level
 |           |               | August|       | w.nmrn.org.uk/major-ap |
 |           |               |               | peals/armada-maps>`__. |
 +-----------+---------------+---------------+------------------------+
+| music     |               |               | The song in the        |
+|           |               |               | Spanish Armada level   |
+|           |               |               | is called Hampton      |
+|           |               |               | court,named after the  |
+|           |               |               | palace where the queen |
+|           |               |               | at the time, Elizabeth |
+|           |               |               | I, was held under      |
+|           |               |               | house arrest on        |
+|           |               |               | suspicion of plotting  |
+|           |               |               | against Mary I, her    |
+|           |               |               | sister.                |
++-----------+---------------+---------------+------------------------+
 
 .. |Francis Drake| image:: https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif
    :target: https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif
