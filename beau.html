@@ -14,9 +14,37 @@ canvas {
 </style>
 </head>
 
-<body onload="startGame()">
-
+<body  onorientationchange="updateOrientation();" onload="startGame()">
+<div id="output"></div>
 <script>
+
+// from https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html#//apple_ref/doc/uid/TP40006511-SW1
+function updateOrientation()
+{
+  var displayStr = "Orientation : ";
+ 
+  switch(window.orientation)
+    {
+      case 0:
+      displayStr += "Portrait";
+      break;
+ 
+      case -90:
+      displayStr += "Landscape (right, screen turned clockwise)";
+      break;
+ 
+      case 90:
+      displayStr += "Landscape (left, screen turned counterclockwise)";
+      break;
+ 
+      case 180:
+      displayStr += "Portrait (upside-down portrait)";
+      break;
+ 
+    }
+    document.getElementById("output").innerHTML = displayStr;
+}
+
 // from https://www.w3schools.com/graphics/game_sound.asp
 function sound(src) {
   this.sound = document.createElement("audio");
