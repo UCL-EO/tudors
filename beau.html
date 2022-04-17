@@ -14,36 +14,8 @@ canvas {
 </style>
 </head>
 
-<body  onorientationchange="updateOrientation();" onload="startGame()">
-<div id="output"></div>
+<body  onload="startGame()">
 <script>
-
-// from https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html#//apple_ref/doc/uid/TP40006511-SW1
-function updateOrientation()
-{
-  var displayStr = "Orientation : ";
- 
-  switch(window.orientation)
-    {
-      case 0:
-      displayStr += "Portrait";
-      break;
- 
-      case -90:
-      displayStr += "Landscape (right, screen turned clockwise)";
-      break;
- 
-      case 90:
-      displayStr += "Landscape (left, screen turned counterclockwise)";
-      break;
- 
-      case 180:
-      displayStr += "Portrait (upside-down portrait)";
-      break;
- 
-    }
-    document.getElementById("output").innerHTML = displayStr;
-}
 
 // from https://www.w3schools.com/graphics/game_sound.asp
 function sound(src) {
@@ -394,6 +366,23 @@ var myGameArea = {
                   myField.width, myField.height);
     }
 }
+
+var startX=myGamePiece.x;
+var startY=myGamePiece.Y;
+// from https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html#//apple_ref/doc/uid/TP40006511-SW1
+element.addEventListener("touchmove", touchMove, false);
+function touchMove(event) {
+    event.preventDefault();
+    curX = event.targetTouches[0].pageX - startX;
+    curY = event.targetTouches[0].pageY - startY;
+    startX = curX;
+    startY = curY;
+    if ( curX > 0 ) myGamePiece.right()
+    if ( curX < 0 ) myGamePiece.left()
+    if ( curY < 0 ) myGamePiece.up()
+    if ( curY > 0 ) myGamePiece.down()
+}
+
 
 printTextObj = function (obj) {
   // round up - use ceil
