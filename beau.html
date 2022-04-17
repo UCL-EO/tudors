@@ -21,7 +21,7 @@ canvas {
 function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
-  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("preload", "true");
   this.sound.setAttribute("controls", "none");
   this.sound.style.display = "none";
   document.body.appendChild(this.sound);
@@ -300,7 +300,13 @@ var wrapText = function (context, text, x, y, maxWidth, lineHeight) {
 };
 
 function startGame(myAv,yourAv,bg) {
- 
+
+    //winSoundFrame.play()
+    //winSoundFrame.play()
+    //var mysound = new sound("greensleeves-flute-and-guitar.mp3");
+    //mysound.currentTime = 0;
+    //mysound.play()
+
     if ( ! myAv ) myAv = myAvatar
     if ( ! yourAv ) yourAv = yourAvatar
     if ( ! bg ) bg = background
@@ -551,13 +557,6 @@ function component(obj) {
             wait=pause_count * 10
             level += 1
             level_up=1
-            if ( level == 2 ) {
-                winSoundFrame = winSound2
-                mySoundFrame = mySound2
-            } else {
-                winSoundFrame = winSound
-                mySoundFrame = mySound
-            }
             myGamePiece.x = Math.floor(background.x/2)
             myGamePiece.y = Math.floor(background.y/2)
             myGamePiece.width *= 3
@@ -634,7 +633,9 @@ function component(obj) {
         if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
             crash = false;
         }
-        if ( crash ) mySoundFrame.play();
+        if ( crash ) {
+            mySoundFrame.play();
+        }
         return crash;
     }
     // fire and add to myBullets
@@ -880,10 +881,16 @@ function updateGameArea() {
         //myGame.update();
         return;
     }
-    //winSoundFrame.stop()
+    winSoundFrame.stop()
+    if ( level == 2 ) {
+       winSoundFrame = winSound2
+       mySoundFrame = mySound2
+    } else {
+       winSoundFrame = winSound
+       mySoundFrame = mySound
+    }
     // action on level up
     if (level_up == 1 ) {
-        winSoundFrame.stop()
         level_up = 0
         reset()
     }
@@ -1259,7 +1266,6 @@ window.addEventListener('resize', resize, false);
 <br>
 <button onmousedown="pause('PAUSED')" onmouseover="pause('PAUSED')">pause</button>
 <button onmousedown="cheat()">cheat</button>
-<button onmousedown="myGamePiece.die()">die</button>
 <br>
 <audio id="myAudio" controls>
   <source src="greensleeves-flute-and-guitar.mp3" type="audio/mpeg">
