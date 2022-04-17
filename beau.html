@@ -15,8 +15,7 @@ canvas {
 </head>
 
 <body  onload="startGame()">
-<p>Click in this area to fire.</p>
-<p id="demo"></p>
+<p>Double click to fire. </p>
 <script>
 
 // from https://www.w3schools.com/graphics/game_sound.asp
@@ -50,6 +49,13 @@ var maxhits = 6;
 var maxlives = 3;
 // pause_count
 pause_count=100
+
+loseOneText = "You have lost the battle of the Spurs"
+loseTwoText = "You have lost to the Armada"
+winOneText = "You have won the battle of the Spurs";
+winTwoText = "You have beaten the Armada"
+meetOneText = "Meet the Tudors: Capture Pierre Terrail to win"
+meetTwoText = "Meet the Tudors: Capture Philip II to win"
 
 // the pieces
 var myGamePiece;
@@ -368,19 +374,28 @@ var myGameArea = {
       }
     }),
     mmove : document.addEventListener('mousemove', e => {
+      const t = 10 ;
       e.returnValue = false;
       e.preventDefault();
       if (isDrawing === true) {
+        if ( x > 0 ) {
+          dx = -e.movementX; //x - e.offsetX;
+          dy = -e.movementY; //y - e.offsetY;
+          if(dx<0)myGamePiece.right(-1*t*dx);
+          else myGamePiece.left(t*dx);
+          if(dy<0)myGamePiece.down(-1*t*dy);
+          else myGamePiece.up(t*dy);
+        }
         x = e.offsetX;
         y = e.offsetY;
-        printer(x,y)
+        //printer(dx,dy)
       }
     }),
-    firer : document.addEventListener("click", function(event) {
+    firer : document.addEventListener("dblclick", function(event) {
       event.returnValue = false;
       event.preventDefault();
       // the above should fix selction issues in browser
-      printer(myGamePiece.fire(),"");
+      myGamePiece.fire()
     }),
     keyboard : document.addEventListener("keydown", function(event) {
         if (event.key == "d" || event.key == "l") {
@@ -399,8 +414,10 @@ var myGameArea = {
           myGamePiece.stop()
         } else if (event.key == "P" || event.key == "O") {
           myGamePiece.pause()
-        } else if (event.key == "C" || event.key == "H") {
+        } else if (event.key == "C" ) {
           cheat()
+        } else if (event.key == "X" ) {
+          myCheat();
         }
     }),
     start : function() {
@@ -409,6 +426,11 @@ var myGameArea = {
         this.context = this.canvas.getContext("2d");
         this.context.textBaseline = 'middle'
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        // instructions
+        if ( level == 1 ) document.getElementById("meet").innerHTML = meetOneText;
+        else if ( level == 2 ) document.getElementById("meet").innerHTML = meetTwoText;
+        else document.getElementById("meet").innerHTML = ""
+
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, interval);
         nCastles = Math.floor(Math.random()*6)+2
@@ -429,7 +451,7 @@ var myGameArea = {
 }
 
 function printer(a, b) {
-  document.getElementById("demo").innerHTML = a + " " + b;
+  document.getElementById("fire").innerHTML = a + " " + b;
 }
 
 printTextObj = function (obj) {
@@ -538,6 +560,8 @@ function component(obj) {
     this.newPos = function(isPiece) {
         this.x += this.speedX;
         this.y += this.speedY;
+        //if (this.hitEnemy(isPiece)) return true;
+        this.hitEnemy(isPiece)
         this.hitBottom(isPiece);
         this.hitTop(isPiece);
         this.hitLeft(isPiece);
@@ -571,25 +595,31 @@ function component(obj) {
         if (this.y > rockbottom) {
             if ( isPiece ) {
                 this.y = rockbottom;
+                return true
             } else {
                 this.active = 0
             }
         }
+        return false
     }
     this.hitTop = function(isPiece) {
         if (this.y < 0) {
             if ( isPiece ) {
                 this.y = 0;
+                return true
             } else {
                 this.active = 0
             }
         }
+        return false
     }
     // what happens when you win
     this.win = function() {
         // clear the deck
         winSoundFrame.play()
         level_up=0;
+        // score
+        myGameArea.score += 1000;
         clear_bullets(this)
         clear_bullets(yourGamePiece)
         //updateGameArea()
@@ -598,6 +628,7 @@ function component(obj) {
         if ( level == maxlevels ) {
             myGame.text="YOU WIN" 
             myGame2.text=""
+            document.getElementById("meet").innerHTML = winTwoText;
             this.iwon=1;
             gameover=1
             myGamePiece.x = Math.floor(background.x/2)
@@ -607,8 +638,9 @@ function component(obj) {
         } else {
             myGame.text="LEVEL UP"
             myGame2.text=""
+            document.getElementById("meet").innerHTML = winOneText
             pause_game=1
-            wait=pause_count * 10
+            wait=pause_count * 10 
             level += 1
             level_up=1
             myGamePiece.x = Math.floor(background.x/2)
@@ -654,27 +686,43 @@ function component(obj) {
             this.y = yourPiece.myBullets[0].y;
         }
     }
+    this.hitEnemy = function(isPiece) {
+        if (myGamePiece.crashWith(yourGamePiece,buffer)){
+            if ( isPiece ) {
+                this.win();
+                return true
+            } else {
+                this.active = 0
+            }        
+        }
+        return false
+    }
     this.hitLeft = function(isPiece) {
         var rockbottom = myGameArea.canvas.width - this.width - buffer;
         if (this.x >= rockbottom) {
             if ( isPiece ) {
                 this.x = rockbottom;
-                this.win()
+                //this.win()
+                return true
             } else {
                 this.active = 0
             }
         }
+        return false
     }
     this.hitRight = function(isPiece) {
         if (this.x < 0) {
             this.x = 0;
+            return true
         }
+        return false
     }
-    this.crashWith = function(otherobj,buffer) {
+    this.crashWith = function(otherobj,buff) {
+        if ( ! buff ) buff = buffer 
         if ( otherobj.active == 0 || this.active == 0) {
             return false
         }
-        var half = Math.floor(buffer/2);
+        var half = Math.floor(buff/2);
         var myleft = this.x+half;
         var myright = this.x + (this.width) - half;
         var mytop = this.y + half;
@@ -698,9 +746,11 @@ function component(obj) {
         if ( this.myBullets.length < maxArrows ) {
             this.myBullets.push(new component(translate_origin(myAvatarFrame.shot,this.x,this.y+Math.random()*70)));
             this.myBullets[this.myBullets.length-1].active=maxhits;
-            return("Fire")
+            document.getElementById("fire").style.color = '#d00'
+            printer("Fire!","")
         }else{
-            return("Wait")
+            document.getElementById("fire").style.color = '#000'
+            printer("Wait:","Out of ammo")
         } 
     }
     this.down = function(n) {
@@ -794,6 +844,13 @@ function component(obj) {
     }
 }
 
+function myCheat() {
+    // kill a ship
+    j = Math.floor(Math.random() * yourGamePiece.myCastles.length)
+    myGamePiece.myCastles[j].active=0;
+    return
+}
+
 function cheat() {
     // kill a ship
     j = Math.floor(Math.random() * yourGamePiece.myCastles.length)
@@ -837,6 +894,11 @@ function amIHit(myPiece,yourPiece) {
                 // game over
                 mySoundLoseFrame.play()
                 myGame.text="GAME OVER"
+                if ( level == 1 ) {
+                  document.getElementById("meet").innerHTML = loseOneText
+                } else {
+                  document.getElementById("meet").innerHTML = loseTwoText;
+                }
                 myGame2.text=""
                 gameover = 1;
                 myPiece.iwon=0;
@@ -1229,8 +1291,8 @@ window.addEventListener('resize', resize, false);
 <br>
 <button type="button" onmouseover="myGamePiece.fire()" onmousedown="myGamePiece.fire()" onmouseup="myGamePiece.fire()" ontouchstart="myGamePiece.fire()">FIRE</button>
 <br>
-<p>Meet the Tudors: Make it to the right of the screen to win</p>
-<br>
+<p id='meet'>Meet the Tudors: Capture the opposition commander  to win</p>
+<p id="fire"></p>
 <br>
 <br>
 <br>
