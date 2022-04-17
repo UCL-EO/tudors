@@ -67,7 +67,11 @@ var speedscale = 600
 var pause_game = 0
 var wait = 0
 var mySound = new sound("crash.mp3");
+var mySound2 = new sound("crash.mp3");
+var mySoundFrame = mySound
 var winSound = new sound("greensleeves-flute-and-guitar.mp3");
+var winSound2 = new sound("hampton_court.mp3");
+var winSoundFrame = winSound
 
 // was y    : 633,
 
@@ -367,22 +371,6 @@ var myGameArea = {
     }
 }
 
-var startX=myGamePiece.x;
-var startY=myGamePiece.Y;
-// from https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html#//apple_ref/doc/uid/TP40006511-SW1
-element.addEventListener("touchmove", touchMove, false);
-function touchMove(event) {
-    event.preventDefault();
-    curX = event.targetTouches[0].pageX - startX;
-    curY = event.targetTouches[0].pageY - startY;
-    startX = curX;
-    startY = curY;
-    if ( curX > 0 ) myGamePiece.right()
-    if ( curX < 0 ) myGamePiece.left()
-    if ( curY < 0 ) myGamePiece.up()
-    if ( curY > 0 ) myGamePiece.down()
-}
-
 
 printTextObj = function (obj) {
   // round up - use ceil
@@ -540,7 +528,7 @@ function component(obj) {
     // what happens when you win
     this.win = function() {
         // clear the deck
-        winSound.play()
+        winSoundFrame.play()
         level_up=0;
         clear_bullets(this)
         clear_bullets(yourGamePiece)
@@ -563,7 +551,11 @@ function component(obj) {
             wait=pause_count * 10
             level += 1
             level_up=1
-
+            if ( level == 2 ) {
+                winSoundFrame = winSound2
+            } else {
+                winSoundFrame = winSound
+            }
             myGamePiece.x = Math.floor(background.x/2)
             myGamePiece.y = Math.floor(background.y/2)
             myGamePiece.width *= 3
@@ -640,7 +632,7 @@ function component(obj) {
         if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
             crash = false;
         }
-        if ( crash ) mySound.play();
+        if ( crash ) mySoundFrame.play();
         return crash;
     }
     // fire and add to myBullets
@@ -886,7 +878,7 @@ function updateGameArea() {
         //myGame.update();
         return;
     }
-    winSound.stop()
+    winSoundFrame.stop()
     // action on level up
     if (level_up == 1 ) {
         level_up = 0
@@ -1043,7 +1035,7 @@ function maxy(n) {
 
 
 function reset_level1(){
-    winSound.play()
+    winSoundFrame.play()
     myAvatarFrame=myAvatar
     yourAvatarFrame=yourAvatar
     backgroundFrame=background
