@@ -3,7 +3,7 @@ tudors
 
 |Documentation Status|
 
-.. image:: tudorQR.png
+.. image:: ../tudorQR.png
 
 `tudors game <http:www2.geog.ucl.ac.uk/~plewis/tudors/beau.html>`__
 
