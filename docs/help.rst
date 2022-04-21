@@ -7,11 +7,13 @@ The aim of the game
 -------------------
 
 to get your character, either King Henry viii or Francis Drake to the
-right of the screen without losing all of your lives. You can lose a
-life by getting hit by a cannonball or a lance (spear) or touching the
-french cavalry or the spanish ships advancing to the left. If they make
-it to the left, it is game over. You have to shoot the ships or horses
-to get past them.
+right of the screen and capture the opposing commander without losing
+all of your lives.
+
+You can lose a life by getting hit by a cannonball or a lance (spear) or
+touching the french cavalry or the spanish ships advancing to the left.
+If they make it to the left, it is game over. You have to shoot the
+ships or horses to get past them.
 
 scoring and lives
 ~~~~~~~~~~~~~~~~~
