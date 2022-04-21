@@ -3,7 +3,6 @@ tudors
 
 |Documentation Status|
 
-[https://bit.ly/398wCoD](https://bit.ly/398wCoD)
 
 .. image:: ../tudorQR.png
 
