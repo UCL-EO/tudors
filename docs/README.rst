@@ -3,6 +3,8 @@ tudors
 
 |Documentation Status|
 
+[https://bit.ly/398wCoD](https://bit.ly/398wCoD)
+
 .. image:: ../tudorQR.png
 
 `tudors game <http:www2.geog.ucl.ac.uk/~plewis/tudors/beau.html>`__
