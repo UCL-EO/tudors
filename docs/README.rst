@@ -5,7 +5,7 @@ tudors
 
 https://bit.ly/398wCoD
 
-.. figure:: tudorQR.png
+.. figure:: https://raw.githubusercontent.com/UCL-EO/tudors/master/tudorQR.gif
    :alt: https://bit.ly/398wCoD
 
    https://bit.ly/398wCoD
