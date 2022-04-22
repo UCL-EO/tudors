@@ -137,7 +137,7 @@ let interval = 20
 let scale = 1
 
 let myScore=0;
-let buffer = 10;
+let buffer = 5;
 let maxArrows = 3;
 let maxEnemyArrows = 50;
 let test=0;
@@ -754,7 +754,7 @@ function component(obj) {
         }
     }
     this.hitEnemy = function(isPiece) {
-        if (myGamePiece.crashWith(yourGamePiece,buffer)){
+        if (myGamePiece.crashWith(yourGamePiece,0)){
             if ( isPiece ) {
                 this.win();
                 return true
@@ -1002,7 +1002,7 @@ function amIHit(myPiece,yourPiece) {
     // lose a life and bounce back
     for (j = 0; j < yourPiece.myCastles.length; j += 1) {
       if ( yourPiece.myCastles[j].active > 0) {
-        if (myPiece.crashWith(yourPiece.myCastles[j],buffer)) {
+        if (myPiece.crashWith(yourPiece.myCastles[j],0)) {
           myPiece.stop()
           myPiece.left(1)
           myGame.text="YOU'RE HIT"
