@@ -42,6 +42,7 @@ let level_up = 0
 let level = 1
 let maxlevels = 2;
 let gameover = 0;
+
 // max hits for castles
 let maxhits = 6;
 // max lives
@@ -197,7 +198,7 @@ var yourAvatar2 = {
   direction : 1
 };
 
-var myStorySetup = {
+var myScores = {
   font:  "5px Consolas",
   color : "red",
   x     :  0,
@@ -257,12 +258,6 @@ function translate_origin (obj,startx,starty) {
   new_obj.startx = Math.floor(startx);
   new_obj.starty = Math.floor(starty);
   return new_obj
-}
-
-// from https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
-// this doesnt seem to work
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // from https://stackoverflow.com/questions/5026961/html5-canvas-ctx-filltext-wont-do-line-breaks
@@ -433,6 +428,10 @@ var myGameArea = {
         addLineOfCastles(yourGamePiece,nCastles,Math.floor(backgroundFrame.x*0.9-yourAvatarFrame.castle.x/4),yourAvatarFrame.castle.x,yourAvatarFrame.castle.y,yourAvatarFrame.castle.file)
 
         },
+    textScreen : function(myText) {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        printTextObj(myText)
+    }
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         ctx = myGameArea.context;
@@ -1127,12 +1126,12 @@ function everyinterval(n) {
 
 function maxx(n) {
     var nn = Math.abs(n)
-    return Math.min(Math.abs(n),background.x/speedscale)
+    return Math.min(Math.abs(n),Math.ceil(background.x/speedscale))
 }
 
 function maxy(n) {
     var nn = Math.abs(n)
-    return Math.min(Math.abs(n),background.y/speedscale)
+    return Math.min(Math.abs(n),Math.ceil(background.y/speedscale))
 }
 
 
@@ -1201,7 +1200,6 @@ function reset_level2(){
 function reset_poor(){
     // try again, but lose your score
     //level_up = 1
-    //sleep(2)
     myGameArea.score = myGameArea.score/2
     if ( level == 1 ) reset_level1();
     if ( level == 2 ) reset_level2();
@@ -1211,13 +1209,8 @@ function help(){
     window.open("help.html")
 }
 
-function bg(){
-    window.open("background.html")
-}
-
 function reset(){
     // wait
-    //sleep(2)
     if ( level == 1 ) reset_level1();
     if ( level == 2 ) reset_level2();
 }
