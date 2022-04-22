@@ -14,8 +14,68 @@ canvas {
 </style>
 </head>
 
+<center>
+<button type="button" onmousedown="myGamePiece.up(4)" onmouseover="myGamePiece.up(1)" onmouseup="myGamePiece.stopy()" ontouchstart="myGamePiece.up(1)">UP</button><br>
+<button type="button" onmousedown="myGamePiece.left(4)" onmouseover="myGamePiece.left(1)" onmouseup="myGamePiece.stopx()" ontouchstart="myGamePiece.left(1)">LEFT</button>
+<button type="button" onmousedown="myGamePiece.stop()" onmouseover="myGamePiece.stop()" onmouseup="myGamePiece.stop()" ontouchstart="myGamePiece.stop()">STOP</button>
+<button type="button" onmousedown="myGamePiece.right(4)" onmouseover="myGamePiece.right(1)" onmouseup="myGamePiece.stopx()" ontouchstart="myGamePiece.right(1)">RIGHT</button>
+<br>
+<button type="button" onmousedown="myGamePiece.down(4)" onmouseover="myGamePiece.down(1)" onmouseup="myGamePiece.stopy()" ontouchstart="myGamePiece.down(1)">DOWN</button>
+<br>
+<button type="button" onmouseover="myGamePiece.fire()" onmousedown="myGamePiece.fire()" onmouseup="myGamePiece.fire()" ontouchstart="myGamePiece.fire()">FIRE</button>
+<br>
+<p id='meet'></p>
+<p id="fire"></p>
+<br>
+</center>
+<h4>high scores</h4>
+<ul text-align: left; id='highScores'></ul>
+
 <body  onload="startGame()">
 <script>
+
+// following https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
+const NO_OF_HIGH_SCORES = 5;
+const HIGH_SCORES = 'highScores';
+var highScoreList = document.getElementById('highScores')
+var xx = 0
+
+function saveHighScore(score, highScores) {
+  var name = prompt('You got a highscore! Enter name:');
+  name = name.slice(0,3).toUpperCase()
+  var newScore = { score, name };
+  
+  // 1. Add to list
+  highScores.push(newScore);
+
+  // 2. Sort the list
+  highScores.sort((a, b) => b.score - a.score);
+  
+  // 3. Select new list
+  highScores.splice(NO_OF_HIGH_SCORES);
+  
+  // 4. Save to local storage
+  localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
+};
+
+function checkHighScore(score) {
+  const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+  const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
+  
+  if (score > lowestScore) {
+    saveHighScore(score, highScores); // TODO
+    showHighScores(); // TODO
+  }
+}
+
+function showHighScores() {
+  const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+  //const highScoreList = document.getElementById(HIGH_SCORES);
+ 
+  highScoreList.innerHTML = highScores
+    .map((score) => `<li>${score.score} - ${score.name}`)
+    .join('');
+}
 
 // from https://www.w3schools.com/graphics/game_sound.asp
 function sound(src) {
@@ -26,7 +86,16 @@ function sound(src) {
   this.sound.style.display = "none";
   document.body.appendChild(this.sound);
   this.play = function(){
-    this.sound.play();
+    var promise = this.sound.play();
+    // see https://developer.chrome.com/blog/autoplay/
+    if (promise !== undefined) {
+      promise.then(_ => {
+        // Autoplay started!
+      }).catch(error => {
+      // Autoplay was prevented.
+      // Show a "Play" button so that user can start playback.
+    });
+}
   }
   this.stop = function(){
     this.sound.pause();
@@ -36,7 +105,8 @@ function sound(src) {
 
 // for testing
 //const hobbit = "In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends of worms and an oozy smell, nor yet a dry, bare, sandy hole with nothing in it to sit down on or to eat: it was a hobbit­hole, and that means comfort.  It had a perfectly round door like a porthole, painted green, with a shiny yellow brass knob in the exact middle. The door opened on to a tube­shaped hall like a tunnel: a very comfortable tunnel without smoke, with panelled walls, and floors tiled and carpeted, provided with polished chairs, and lots and lots of pegs for hats and coats ­ the hobbit was fond of visitors. The tunnel wound on and on, going fairly but not quite straight into the side of the hill ­ The Hill, as all the people for many miles round called it ­ and many little round doors opened out of it, first on one side and then on another. No going upstairs for the hobbit: bedrooms, bathrooms, cellars, pantries (lots of these), wardrobes (he had whole rooms devoted to clothes), kitchens, dining­rooms, all were on the same floor, and indeed on the same passage. The best rooms were all on the left­hand side (going in), for these were the only ones to have windows, deep­set round windows looking over his garden and meadows beyond, sloping down to the river."
-const hobbit = "In a hole"
+
+let site = "https://raw.githubusercontent.com/UCL-EO/tudors/master/"
 
 let level_up = 0
 let level = 1
@@ -67,29 +137,29 @@ let interval = 20
 let scale = 1
 
 let myScore=0;
-let buffer = 20;
+let buffer = 10;
 let maxArrows = 3;
 let maxEnemyArrows = 50;
 let test=0;
 let speedscale = 600
 let pause_game = 0
 let wait = 0
-let mySound = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/arrow.mp3");
-let mySound2 = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/crash.mp3");
+let mySound = new sound(site+"arrow.mp3");
+let mySound2 = new sound(site+"crash.mp3");
 let mySoundFrame = mySound
-let winSound = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/greensleeves-flute-and-guitar.mp3");
-let winSound2 = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/hampton_court.mp3");
+let winSound = new sound(site+"greensleeves-flute-and-guitar.mp3");
+let winSound2 = new sound(site+"hampton_court.mp3");
 let winSoundFrame = winSound
-let mySoundLose = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/machaut_puis.mp3")
-let mySoundLose2 = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/anonymous_cantigas.mp3")
+let mySoundLose = new sound(site+"machaut_puis.mp3")
+let mySoundLose2 = new sound(site+"anonymous_cantigas.mp3")
 let mySoundLoseFrame = mySoundLose
 
 // was y    : 633,
 
 var background = {
-  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/background.gif",
+  file : site+"background.gif",
   x    : 1024,
-  y    : 512,
+  y    : 511,
   startx : 0,
   starty : 0,
   type : "image",
@@ -97,9 +167,9 @@ var background = {
 };
 
 var background2 = {
-  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/background2.gif",
+  file : site+"background2.gif",
   x    : 1024,
-  y    : 512,
+  y    : 511,
   startx : 0,
   starty : 0,
   type : "image",
@@ -108,20 +178,20 @@ var background2 = {
 
 
 var myAvatar = {
-  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/henry.gif",
+  file : site+"henry.gif",
   x    : 70,
   y    : 70,
   startx : 10,
   starty : 120,
   shot : {
-    file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/arrow.gif",
+    file : site+"arrow.gif",
     x : 50,
     y : 10,
     direction : 1,
   },
   castle : {
     // root name for castle
-    file : "rhorse",
+    file : site+"rhorse",
     x    : 77,
     y    : 77,
     direction : 0
@@ -132,20 +202,20 @@ var myAvatar = {
 
 // level 2
 var myAvatar2 = {
-  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif",
+  file : site+"drake.gif",
   x    : 70,
   y    : 70,
   startx : 10,
   starty : 120,
   shot : {
-    file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/ball.gif",
+    file : site+"ball.gif",
     x : 12,
     y : 12,
     direction : 1,
   },
   castle : {
     // root name for castle
-    file : "englishship",
+    file : site+"englishship",
     x    : 77,
     y    : 77,
     direction : 0
@@ -155,19 +225,19 @@ var myAvatar2 = {
 };
 
 var yourAvatar = {
-  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/pierre.gif",
+  file : site+"pierre.gif",
   x    : 70,
   y    : 70,
   startx : background.x - myAvatar.x - 10,
   starty : 0,
   shot : { 
-    file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/back_arrow.gif",
+    file : site+"back_arrow.gif",
     x : 70,
     y : 10,
     direction : -1
   },
   castle : {
-    file : "horse",
+    file : site+"horse",
     x    : 100,
     y    : 100,
     direction : -1
@@ -177,19 +247,19 @@ var yourAvatar = {
 };
 
 var yourAvatar2 = {
-  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/philip2.gif",
+  file : site+"philip2.gif",
   x    : 70,
   y    : 70,
   startx : background2.x - myAvatar2.x - 10,
   starty : 0,
   shot : {
-    file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/cannon.gif",
+    file : site+"cannon.gif",
     x : 10,
     y : 10,
     direction : -1
   },
   castle : {
-    file : "spanishship",
+    file : site+"spanishship",
     x    : 100,
     y    : 100,
     direction : -1
@@ -198,12 +268,12 @@ var yourAvatar2 = {
   direction : 1
 };
 
-var myScores = {
+var myScoreTableSetup = {
   font:  "5px Consolas",
   color : "red",
-  x     :  0,
-  y     :  0,
-  text  : hobbit,
+  x     :  50,
+  y     :  50,
+  text  : "Blaa blaa",
   active : true
 }
 
@@ -323,6 +393,7 @@ function startGame(myAv,yourAv,bg) {
     myScore = new text_component(myScoreSetup);
     // Lives
     myLife = new text_component(myLifeSetup);
+    myScoreTable = new text_component(myScoreTableSetup);
 
     myGameArea.start();
 }
@@ -412,9 +483,11 @@ var myGameArea = {
         this.canvas.width = background.x;
         this.canvas.height = background.y;
         this.context = this.canvas.getContext("2d");
-        this.context.textBaseline = 'middle'
+        //this.context.textBaseline = 'middle'
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         // instructions
+        highScoreList.innerHTML = ""
+        showHighScores()
         if ( level == 1 ) document.getElementById("meet").innerHTML = meetOneText;
         else if ( level == 2 ) document.getElementById("meet").innerHTML = meetTwoText;
         else document.getElementById("meet").innerHTML = ""
@@ -431,7 +504,7 @@ var myGameArea = {
     textScreen : function(myText) {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         printTextObj(myText)
-    }
+    },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         ctx = myGameArea.context;
@@ -446,9 +519,9 @@ function printer(a, b) {
   document.getElementById("fire").innerHTML = a + " " + b;
 }
 
-printTextObj = function (obj) {
+var printTextObj = function (obj) {
   // round up - use ceil
-  maxWidth = Math.ceil((background.x-obj.x) * 0.5)
+  maxWidth = Math.ceil((background.x+obj.x) * 0.9)
   // parseInt see
   // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_parseint1
   // should work with eg "10px Consolas" to give 10
@@ -620,6 +693,7 @@ function component(obj) {
         myScore.update();
         if ( level == maxlevels ) {
             myGame.text="YOU WIN" 
+            checkHighScore(myGameArea.score)
             myGame2.text=""
             document.getElementById("meet").innerHTML = winTwoText;
             this.iwon=1;
@@ -715,7 +789,7 @@ function component(obj) {
         if ( otherobj.active == 0 || this.active == 0) {
             return false
         }
-        var half = Math.floor(buff/2);
+        var half = -1 * Math.floor(buff/2);
         var myleft = this.x+half;
         var myright = this.x + (this.width) - half;
         var mytop = this.y + half;
@@ -730,6 +804,7 @@ function component(obj) {
         }
         if ( crash ) {
             mySoundFrame.play();
+            return true
         }
         return crash;
     }
@@ -839,7 +914,7 @@ function component(obj) {
 
 function myCheat() {
     // kill a ship
-    j = Math.floor(Math.random() * yourGamePiece.myCastles.length)
+    j = Math.floor(Math.random() * myGamePiece.myCastles.length)
     myGamePiece.myCastles[j].active=0;
     return
 }
@@ -875,6 +950,7 @@ function loser(myPiece,yourPiece) {
       myPiece.myBullets[i].active = 0
     } 
     myGame.text="GAME OVER"
+    checkHighScore(myGameArea.score)
     if ( level == 1 ) {
       document.getElementById("meet").innerHTML = loseOneText
     } else {
@@ -957,7 +1033,10 @@ function pause(txt,txt2) {
 function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
 
-    if ( gameover == 1 ) return;
+    if ( gameover == 1 ) {
+      clearInterval(myGameArea.interval)
+      return;
+    }
 
     // we count down wait to 1
     // because wait = 0 is do nothing
@@ -1215,10 +1294,6 @@ function reset(){
     if ( level == 2 ) reset_level2();
 }
 
-//window.addEventListener("resize", function(event) {
-//    console.log(document.body.clientWidth + ' wide by ' + document.body.clientHeight+' high');
-//})
-
 function resize() {
 
     var canvas = document.getElementById('game');
@@ -1242,28 +1317,6 @@ function resize() {
 window.addEventListener('resize', resize, false);
 
 </script>
-<br>
-<center>
-<button type="button" onmousedown="myGamePiece.up(4)" onmouseover="myGamePiece.up(1)" onmouseup="myGamePiece.stopy()" ontouchstart="myGamePiece.up(1)">UP</button><br>
-<button type="button" onmousedown="myGamePiece.left(4)" onmouseover="myGamePiece.left(1)" onmouseup="myGamePiece.stopx()" ontouchstart="myGamePiece.left(1)">LEFT</button>
-<button type="button" onmousedown="myGamePiece.stop()" onmouseover="myGamePiece.stop()" onmouseup="myGamePiece.stop()" ontouchstart="myGamePiece.stop()">STOP</button>
-<button type="button" onmousedown="myGamePiece.right(4)" onmouseover="myGamePiece.right(1)" onmouseup="myGamePiece.stopx()" ontouchstart="myGamePiece.right(1)">RIGHT</button>
-<br>
-<button type="button" onmousedown="myGamePiece.down(4)" onmouseover="myGamePiece.down(1)" onmouseup="myGamePiece.stopy()" ontouchstart="myGamePiece.down(1)">DOWN</button>
-<br>
-<button type="button" onmouseover="myGamePiece.fire()" onmousedown="myGamePiece.fire()" onmouseup="myGamePiece.fire()" ontouchstart="myGamePiece.fire()">FIRE</button>
-<br>
-<p id='meet'></p>
-<p id="fire"></p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br><br>
 <br>
 <br>
 <br>
