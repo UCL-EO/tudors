@@ -1,4 +1,7 @@
 The Game
 ========
 
-`Start the game <http://www2.geog.ucl.ac.uk/~plewis/tudors/beau.html>`__
+|bg.gif|
+
+.. |bg.gif| image:: http://www2.geog.ucl.ac.uk/~plewis/tudors/beau.html
+   :target: http://www2.geog.ucl.ac.uk/~plewis/tudors/beau.html

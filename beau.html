@@ -73,20 +73,20 @@ var test=0;
 var speedscale = 600
 var pause_game = 0
 var wait = 0
-var mySound = new sound("arrow.mp3");
-var mySound2 = new sound("crash.mp3");
+var mySound = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/arrow.mp3");
+var mySound2 = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/crash.mp3");
 var mySoundFrame = mySound
-var winSound = new sound("greensleeves-flute-and-guitar.mp3");
-var winSound2 = new sound("hampton_court.mp3");
+var winSound = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/greensleeves-flute-and-guitar.mp3");
+var winSound2 = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/hampton_court.mp3");
 var winSoundFrame = winSound
-var mySoundLose = new sound("machaut_puis.mp3")
-var mySoundLose2 = new sound("anonymous_cantigas.mp3")
+var mySoundLose = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/machaut_puis.mp3")
+var mySoundLose2 = new sound("https://raw.githubusercontent.com/UCL-EO/tudors/master/anonymous_cantigas.mp3")
 var mySoundLoseFrame = mySoundLose
 
 // was y    : 633,
 
 var background = {
-  file : "background.gif",
+  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/background.gif",
   x    : 1024,
   y    : 500,
   startx : 0,
@@ -96,7 +96,7 @@ var background = {
 };
 
 var background2 = {
-  file : "background2.gif",
+  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/background2.gif",
   x    : 1024,
   y    : 500,
   startx : 0,
@@ -107,13 +107,13 @@ var background2 = {
 
 
 var myAvatar = {
-  file : "henry.gif",
+  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/henry.gif",
   x    : 70,
   y    : 70,
   startx : 10,
   starty : 120,
   shot : {
-    file : "arrow.gif",
+    file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/arrow.gif",
     x : 50,
     y : 10,
     direction : 1,
@@ -131,13 +131,13 @@ var myAvatar = {
 
 // level 2
 var myAvatar2 = {
-  file : "drake.gif",
+  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/drake.gif",
   x    : 70,
   y    : 70,
   startx : 10,
   starty : 120,
   shot : {
-    file : "ball.gif",
+    file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/ball.gif",
     x : 12,
     y : 12,
     direction : 1,
@@ -154,13 +154,13 @@ var myAvatar2 = {
 };
 
 var yourAvatar = {
-  file : "pierre.gif",
+  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/pierre.gif",
   x    : 70,
   y    : 70,
   startx : background.x - myAvatar.x - 10,
   starty : 0,
   shot : { 
-    file : "back_arrow.gif",
+    file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/back_arrow.gif",
     x : 70,
     y : 10,
     direction : -1
@@ -176,13 +176,13 @@ var yourAvatar = {
 };
 
 var yourAvatar2 = {
-  file : "philip2.gif",
+  file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/philip2.gif",
   x    : 70,
   y    : 70,
   startx : background2.x - myAvatar2.x - 10,
   starty : 0,
   shot : {
-    file : "cannon.gif",
+    file : "https://raw.githubusercontent.com/UCL-EO/tudors/master/cannon.gif",
     x : 10,
     y : 10,
     direction : -1
@@ -310,12 +310,6 @@ var wrapText = function (context, text, x, y, maxWidth, lineHeight) {
 };
 
 function startGame(myAv,yourAv,bg) {
-
-    //winSoundFrame.play()
-    //winSoundFrame.play()
-    //var mysound = new sound("greensleeves-flute-and-guitar.mp3");
-    //mysound.currentTime = 0;
-    //mysound.play()
 
     if ( ! myAv ) myAv = myAvatar
     if ( ! yourAv ) yourAv = yourAvatar
